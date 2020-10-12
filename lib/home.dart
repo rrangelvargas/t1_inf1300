@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t1_inf1300/forgotpassword.dart';
+import 'package:t1_inf1300/newrequestfragment.dart';
 
 class HomePage extends StatefulWidget {
   String title = 'Pharma +';
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
   _getDrawerItem(int pos) {
     switch (pos) {
       case 0:
-        return ForgotPassword();
+        return ;
       case 1:
         return;
       case 2:
