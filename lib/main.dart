@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/register.dart';
 import 'package:t1_inf1300/forgotpassword.dart';
+import 'package:t1_inf1300/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -48,7 +49,10 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: InputDecoration(labelText: 'Senha'),
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => new HomePage()));
+              },
               child: const Text('Entrar', style: TextStyle(fontSize: 20)),
             ),
             FlatButton(
