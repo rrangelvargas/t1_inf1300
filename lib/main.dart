@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/register.dart';
+import 'package:t1_inf1300/forgotpassword.dart';
 
 void main() {
   runApp(MyApp());
@@ -52,7 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             FlatButton(
               onPressed: () {
-                /*...*/
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => new ForgotPassword()));
               },
               child: Text(
                 "Esqueci a senha",
