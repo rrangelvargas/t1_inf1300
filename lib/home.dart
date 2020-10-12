@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t1_inf1300/forgotpassword.dart';
 
 class HomePage extends StatefulWidget {
   String title = 'Pharma +';
@@ -9,11 +10,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: Center(child: Text('My Page!')),
+      body: _getDrawerItem(_selectedIndex),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
@@ -31,41 +34,48 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text('Novo Pedido'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
+                _onSelectItem(0);
               },
             ),
             ListTile(
               title: Text('Meus Pedidos'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
+                _onSelectItem(1);
               },
             ),
             ListTile(
               title: Text('Meu Perfil'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
+                _onSelectItem(2);
               },
             ),
             ListTile(
               title: Text('Sair'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawe
+                _onSelectItem(3);
               },
             ),
           ],
         ),
       ),
     );
+  }
+
+  _getDrawerItem(int pos) {
+    switch (pos) {
+      case 0:
+        return ForgotPassword();
+      case 1:
+        return;
+      case 2:
+        return;
+      case 3:
+        return;
+    }
+  }
+
+  _onSelectItem(int index) {
+    setState(() => _selectedIndex = index);
+    Navigator.of(context).pop();
   }
 }
