@@ -26,7 +26,7 @@ class _CartState extends State<Cart> {
         persistentFooterButtons: <Widget>[
           RaisedButton(
             onPressed: () {},
-            child: Text('Total: ' + _get_total_price() + ' - Finalizar compra',
+            child: Text('Total: ' + _getTotalPrice() + ' - Finalizar compra',
                 style: TextStyle(fontSize: 20)),
           ),
         ]);
@@ -49,7 +49,7 @@ class _CartState extends State<Cart> {
     );
   }
 
-  String _get_total_price() {
+  String _getTotalPrice() {
     var price = 0.0;
     for (var item in this._products) {
       price += double.parse(item.price);
