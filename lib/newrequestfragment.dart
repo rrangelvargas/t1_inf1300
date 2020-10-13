@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t1_inf1300/Product.dart';
 
 class NewRequest extends StatefulWidget {
   NewRequest();
@@ -8,7 +9,7 @@ class NewRequest extends StatefulWidget {
 }
 
 class _NewRequestState extends State<NewRequest> {
-  List<String> _products = List<String>();
+  List<Product> _products = List<Product>();
 
   @override
   void initState() {
@@ -23,19 +24,19 @@ class _NewRequestState extends State<NewRequest> {
         child: ListView.builder(
             itemCount: _products.length,
             itemBuilder: (BuildContext context, int index) {
-              String product = _products[index];
+              Product product = _products[index];
 
               return GestureDetector(
                 onTap: () {},
                 child: ListTile(
-                  title: Text(product),
+                  title: Text(product.name),
                   leading: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Text(product),
+                      Text(product.description),
                       CircleAvatar(
                         backgroundColor: Colors.blueAccent,
-                        backgroundImage: NetworkImage(product),
+                        backgroundImage: NetworkImage(product.image),
                       )
                     ],
                   ),
@@ -47,7 +48,8 @@ class _NewRequestState extends State<NewRequest> {
   }
 
   void getProducts() async {
-    _products.add('Dipirona');
+    _products.add(Product(10, "Teste", "20", "Testeeeeeeee", "as"));
+
     setState(() {});
   }
 }
