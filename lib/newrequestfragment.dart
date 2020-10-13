@@ -29,15 +29,14 @@ class _NewRequestState extends State<NewRequest> {
               return GestureDetector(
                 onTap: () {},
                 child: ListTile(
-                  title: Text(product.name),
                   leading: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Text(product.description),
                       CircleAvatar(
                         backgroundColor: Colors.blueAccent,
                         backgroundImage: NetworkImage(product.image),
-                      )
+                      ),
+                      Text(product.description),
                     ],
                   ),
                 ),
@@ -48,7 +47,8 @@ class _NewRequestState extends State<NewRequest> {
   }
 
   void getProducts() async {
-    _products.add(Product(10, "Teste", "20", "Testeeeeeeee", "as"));
+    _products.add(new Product(10, "Teste", "20", "Testeeeeeeee", "as"));
+    _products.add(new Product(100, "Dip", "20", "Testeeeeeeee", "as"));
 
     setState(() {});
   }
