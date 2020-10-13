@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/newrequestfragment.dart';
+import 'package:t1_inf1300/cart.dart';
 
 class HomePage extends StatefulWidget {
   String title = 'Pharma +';
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              title: Text('Meu Perfil'),
+              title: Text('Carrinho'),
               onTap: () {
                 _onSelectItem(2);
               },
@@ -68,7 +69,7 @@ class _HomePageState extends State<HomePage> {
       case 1:
         return;
       case 2:
-        return;
+        return new Cart();
       case 3:
         return;
     }
