@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
   _getDrawerItem(int pos) {
     switch (pos) {
       case 0:
-        return ;
+        return new NewRequest();
       case 1:
         return;
       case 2:
