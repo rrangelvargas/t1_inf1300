@@ -36,8 +36,15 @@ class _AddProductState extends State<AddProduct> {
       onPressed: () {},
     );
 
+    var height = MediaQuery.of(context).size.height * 0.4;
+    var width = MediaQuery.of(context).size.width * 0.3;
+
     return AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
         content: Container(
+          height: height,
+          width: width,
           child: Column(
             children: <Widget>[
               Row(
