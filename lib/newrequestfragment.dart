@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/Product.dart';
+import 'package:t1_inf1300/AddProduct.dart';
 
 class NewRequest extends StatefulWidget {
   NewRequest();
@@ -43,7 +44,10 @@ class _NewRequestState extends State<NewRequest> {
                 itemBuilder: (BuildContext context, int index) {
                   Product product = _products[index];
                   return GestureDetector(
-                      onTap: () {}, child: _buildRow(product));
+                      onTap: () {
+                        showAlertDialog3(context, product);
+                      },
+                      child: _buildRow(product));
                 }),
           )
         ],
