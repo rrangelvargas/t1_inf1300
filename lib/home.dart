@@ -44,12 +44,12 @@ class _HomePageState extends State<HomePage> {
                 _onSelectItem(1);
               },
             ),
-            ListTile(
-              title: Text('Carrinho'),
-              onTap: () {
-                _onSelectItem(2);
-              },
-            ),
+            // ListTile(
+            //   title: Text('Meus Pedidos'),
+            //   onTap: () {
+            //     _onSelectItem(2);
+            //   },
+            // ),
             ListTile(
               title: Text('Sair'),
               onTap: () {
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
       case 1:
         return;
       case 2:
-        return new Cart();
+        return;
       case 3:
         return;
     }
