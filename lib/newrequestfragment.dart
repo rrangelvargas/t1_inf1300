@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/Product.dart';
 import 'package:t1_inf1300/AddProduct.dart';
+import 'package:t1_inf1300/cart.dart';
 
 class NewRequest extends StatefulWidget {
   NewRequest();
@@ -53,7 +54,15 @@ class _NewRequestState extends State<NewRequest> {
                       },
                       child: _buildRow(product));
                 }),
-          )
+          ),
+          RaisedButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => new Cart()));
+            },
+            child:
+                Text('Adicionar ao carrinho', style: TextStyle(fontSize: 20)),
+          ),
         ],
       )),
     );
