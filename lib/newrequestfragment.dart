@@ -45,7 +45,11 @@ class _NewRequestState extends State<NewRequest> {
                   Product product = _products[index];
                   return GestureDetector(
                       onTap: () {
-                        showAlertDialog3(context, product);
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AddProduct(product: product);
+                            });
                       },
                       child: _buildRow(product));
                 }),
