@@ -4,6 +4,7 @@ import 'package:t1_inf1300/forgotpassword.dart';
 import 'package:t1_inf1300/home.dart';
 import 'package:t1_inf1300/StyledRaisedButton.dart';
 import 'package:t1_inf1300/StyledFlatButton.dart';
+import 'package:t1_inf1300/StyledTextFormField.dart';
 
 void main() {
   runApp(MyApp());
@@ -44,11 +45,17 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Email'),
+            StyledTextFormField(
+              labelText: 'Email',
+              maxLines: 1,
+              textInputType: TextInputType.emailAddress,
+              obscureText: false,
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Senha'),
+            StyledTextFormField(
+              labelText: 'Senha',
+              maxLines: 1,
+              textInputType: TextInputType.visiblePassword,
+              obscureText: true,
             ),
             StyledRaisedButton(title: "Entrar", callback: _navigateToHome),
             StyledFlatButton(
