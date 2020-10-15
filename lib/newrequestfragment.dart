@@ -22,6 +22,7 @@ class _NewRequestState extends State<NewRequest> {
   @override
   Widget build(BuildContext buildContext) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: Container(
           child: Column(
         children: <Widget>[
@@ -84,22 +85,38 @@ class _NewRequestState extends State<NewRequest> {
   }
 
   _buildRow(Product product) {
-    return ListTile(
-      leading: Row(
-        mainAxisSize: MainAxisSize.min,
+    return Container(
+      width: double.infinity,
+      height: 100,
+      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+      child: Card(
+          child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Image(
-            image: NetworkImage(product.image),
-            width: 50,
-            height: 50,
+          Expanded(
+            flex: 2,
+            child: Image(
+              image: NetworkImage(product.image),
+              width: 50,
+              height: 50,
+            ),
           ),
-          Column(children: <Widget>[
-            Text(product.name),
-            Text(product.description)
-          ]),
-          Text(product.price),
+          Expanded(
+            flex: 2,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(product.name),
+                  Text(product.description)
+                ]),
+          ),
+          Expanded(
+            flex: 2,
+            child: Text(product.price),
+          ),
         ],
-      ),
+      )),
     );
   }
 }
