@@ -56,24 +56,42 @@ class _MyOrdersState extends State<MyOrders> {
   }
 
   _buildRow(Product product) {
-    return ListTile(
-      leading: Row(
-        mainAxisSize: MainAxisSize.min,
+    return Container(
+      width: double.infinity,
+      height: 100,
+      padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
+      child: Card(
+          child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Image(
-            image: NetworkImage(product.image),
-            width: 50,
-            height: 50,
+          Expanded(
+            flex: 2,
+            child: Image(
+              image: NetworkImage(product.image),
+              width: 50,
+              height: 50,
+            ),
           ),
-          Column(children: <Widget>[
-            Text(product.name),
-            Text(product.description)
-          ]),
-          Column(
-            children: <Widget>[Text(product.price), Text("Aguardando")],
-          )
+          Expanded(
+            flex: 2,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(product.name),
+                  Text(product.description)
+                ]),
+          ),
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[Text(product.price), Text("Aguardando")],
+            ),
+          ),
         ],
-      ),
+      )),
     );
   }
 }

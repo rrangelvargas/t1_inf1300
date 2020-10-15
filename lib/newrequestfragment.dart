@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t1_inf1300/Product.dart';
 import 'package:t1_inf1300/AddProduct.dart';
 import 'package:t1_inf1300/cart.dart';
+import 'package:t1_inf1300/StyledRaisedButtonLong.dart';
 
 class NewRequest extends StatefulWidget {
   NewRequest();
@@ -62,14 +63,8 @@ class _NewRequestState extends State<NewRequest> {
                 ),
           search.isEmpty
               ? Text("")
-              : RaisedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => new Cart()));
-                  },
-                  child: Text('Adicionar ao carrinho',
-                      style: TextStyle(fontSize: 20)),
-                ),
+              : StyledRaisedButtonLong(
+                  title: 'Adicionar ao carrinho', callback: _navigateToCart)
         ],
       )),
     );
@@ -88,7 +83,7 @@ class _NewRequestState extends State<NewRequest> {
     return Container(
       width: double.infinity,
       height: 100,
-      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+      padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
       child: Card(
           child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -118,5 +113,10 @@ class _NewRequestState extends State<NewRequest> {
         ],
       )),
     );
+  }
+
+  void _navigateToCart() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) => new Cart()));
   }
 }

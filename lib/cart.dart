@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/Product.dart';
 import 'package:t1_inf1300/StyledListTile.dart';
+import 'package:t1_inf1300/StyledRaisedButtonLong.dart';
 
 class Cart extends StatefulWidget {
   Cart();
@@ -28,11 +29,9 @@ class _CartState extends State<Cart> {
             itemCount: this._products.length,
             itemBuilder: (context, index) => this._buildRow(index)),
         persistentFooterButtons: <Widget>[
-          RaisedButton(
-            onPressed: () {},
-            child: Text('Total: ' + _getTotalPrice() + ' - Finalizar compra',
-                style: TextStyle(fontSize: 20)),
-          ),
+          StyledRaisedButtonLong(
+              title: 'Total: ' + _getTotalPrice() + ' - Finalizar compra',
+              callback: _finishBuy)
         ]);
   }
 
@@ -60,4 +59,6 @@ class _CartState extends State<Cart> {
     }
     return "$price";
   }
+
+  void _finishBuy() {}
 }
