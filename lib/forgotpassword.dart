@@ -12,6 +12,7 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width * 0.8;
     return Scaffold(
       appBar: AppBar(
         title: Text("Esqueci a senha"),
@@ -20,9 +21,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            Container(
+              width: width,
+              padding: EdgeInsets.symmetric(vertical: 20.0),
+              child: Text(
                 'Para recuperar a senha, digite seu email abaixo que iremos enviar uma nova senha',
-                style: TextStyle(fontSize: 20)),
+                style: TextStyle(fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+            ),
             StyledTextFormField(
               labelText: 'Email',
               maxLines: 1,
