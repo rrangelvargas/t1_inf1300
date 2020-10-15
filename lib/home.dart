@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t1_inf1300/newrequestfragment.dart';
 import 'package:t1_inf1300/cart.dart';
 import 'package:t1_inf1300/order.dart';
+import 'package:t1_inf1300/MyOrders.dart';
 
 class HomePage extends StatefulWidget {
   String title = 'Pharma +';
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
       case 2:
         return;
       case 3:
-        return;
+        return MyOrders();
     }
   }
 
