@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/StyledRaisedButton.dart';
+import 'package:t1_inf1300/StyledTextFormField.dart';
 
 class Register extends StatefulWidget {
   Register();
@@ -19,17 +20,29 @@ class _RegisterState extends State<Register> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Nome'),
+            StyledTextFormField(
+              labelText: 'Nome',
+              maxLines: 1,
+              textInputType: TextInputType.name,
+              obscureText: false,
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Email'),
+            StyledTextFormField(
+              labelText: 'Email',
+              maxLines: 1,
+              textInputType: TextInputType.emailAddress,
+              obscureText: false,
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Senha'),
+            StyledTextFormField(
+              labelText: 'Senha',
+              maxLines: 1,
+              textInputType: TextInputType.visiblePassword,
+              obscureText: true,
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Confirmar senha'),
+            StyledTextFormField(
+              labelText: 'Confirmar senha',
+              maxLines: 1,
+              textInputType: TextInputType.visiblePassword,
+              obscureText: true,
             ),
             StyledRaisedButton(title: "Registrar", callback: _register)
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/StyledRaisedButton.dart';
+import 'package:t1_inf1300/StyledTextFormField.dart';
 
 class ForgotPassword extends StatefulWidget {
   ForgotPassword();
@@ -22,8 +23,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             Text(
                 'Para recuperar a senha, digite seu email abaixo que iremos enviar uma nova senha',
                 style: TextStyle(fontSize: 20)),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Email'),
+            StyledTextFormField(
+              labelText: 'Email',
+              maxLines: 1,
+              textInputType: TextInputType.emailAddress,
+              obscureText: false,
             ),
             StyledRaisedButton(
                 title: "Recuperar senha", callback: _forgotPassword),
