@@ -47,9 +47,17 @@ class _MyOrdersState extends State<MyOrders> {
   }
 
   void getProducts() async {
-    _products.add(new Product(10, "Teste", "20", "Testeeeeeeee",
-        "https://drogariasp.vteximg.com.br/arquivos/ids/168973-500-500/7896422507066.JPG.jpg?v=635651364067870000"));
-    _products.add(new Product(100, "Dip", "20", "Testeeeeeeee",
+    _products.add(new Product(
+        10,
+        "Dorflex",
+        "20.0",
+        "Medicamento destinado a para dores",
+        "https://img.onofre.com.br/catalog/product/d/o/dorflex-com-10-comprimidos--7891058017392_hero1.jpg?width=265&height=265&quality=50&type=resize"));
+    _products.add(new Product(
+        100,
+        "Dipirona",
+        "10.0",
+        "Medicamento destinado a para adultos",
         "https://drogariasp.vteximg.com.br/arquivos/ids/168973-500-500/7896422507066.JPG.jpg?v=635651364067870000"));
 
     setState(() {});
@@ -87,7 +95,10 @@ class _MyOrdersState extends State<MyOrders> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[Text(product.price), Text("Aguardando")],
+              children: <Widget>[
+                Text('RS ${product.price}'),
+                Text("Aguardando")
+              ],
             ),
           ),
         ],

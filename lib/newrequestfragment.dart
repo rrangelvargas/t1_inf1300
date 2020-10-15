@@ -13,7 +13,7 @@ class NewRequest extends StatefulWidget {
 
 class _NewRequestState extends State<NewRequest> {
   List<Product> _products = List<Product>();
-  String search = '';
+  List<Product> _filteredList = List<Product>();
   @override
   void initState() {
     super.initState();
@@ -22,6 +22,7 @@ class _NewRequestState extends State<NewRequest> {
 
   @override
   Widget build(BuildContext buildContext) {
+    var width = MediaQuery.of(context).size.width * 0.8;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: Container(
@@ -32,7 +33,7 @@ class _NewRequestState extends State<NewRequest> {
             child: TextField(
               onChanged: (value) {
                 setState(() {
-                  search = value;
+                  filterSearchResults(value);
                 });
               },
               //controller: editingController,
@@ -43,13 +44,20 @@ class _NewRequestState extends State<NewRequest> {
                       borderRadius: BorderRadius.all(Radius.circular(15.0)))),
             ),
           ),
-          search.isEmpty
-              ? Text('Pesquise para encontrar produtos')
+          _filteredList.isEmpty
+              ? Container(
+                  width: width,
+                  padding: EdgeInsets.symmetric(vertical: 40.0),
+                  child: Text(
+                    'Pesquise para encontrar produtos',
+                    style: TextStyle(fontSize: 18),
+                    textAlign: TextAlign.center,
+                  ))
               : Expanded(
                   child: ListView.builder(
-                      itemCount: _products.length,
+                      itemCount: _filteredList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        Product product = _products[index];
+                        Product product = _filteredList[index];
                         return GestureDetector(
                             onTap: () {
                               showDialog(
@@ -61,7 +69,7 @@ class _NewRequestState extends State<NewRequest> {
                             child: _buildRow(product));
                       }),
                 ),
-          search.isEmpty
+          _filteredList.isEmpty
               ? Text("")
               : StyledRaisedButtonLong(
                   title: 'Adicionar ao carrinho', callback: _navigateToCart)
@@ -71,9 +79,17 @@ class _NewRequestState extends State<NewRequest> {
   }
 
   void getProducts() async {
-    _products.add(new Product(10, "Teste", "20", "Testeeeeeeee",
-        "https://drogariasp.vteximg.com.br/arquivos/ids/168973-500-500/7896422507066.JPG.jpg?v=635651364067870000"));
-    _products.add(new Product(100, "Dip", "20", "Testeeeeeeee",
+    _products.add(new Product(
+        10,
+        "Dorflex",
+        "20.0",
+        "Medicamento destinado a para dores",
+        "https://img.onofre.com.br/catalog/product/d/o/dorflex-com-10-comprimidos--7891058017392_hero1.jpg?width=265&height=265&quality=50&type=resize"));
+    _products.add(new Product(
+        100,
+        "Dipirona",
+        "10.0",
+        "Medicamento destinado a para adultos",
         "https://drogariasp.vteximg.com.br/arquivos/ids/168973-500-500/7896422507066.JPG.jpg?v=635651364067870000"));
 
     setState(() {});
@@ -108,7 +124,7 @@ class _NewRequestState extends State<NewRequest> {
           ),
           Expanded(
             flex: 2,
-            child: Text(product.price),
+            child: Text('RS ${product.price}'),
           ),
         ],
       )),
@@ -118,5 +134,18 @@ class _NewRequestState extends State<NewRequest> {
   void _navigateToCart() {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (BuildContext context) => new Cart()));
+  }
+
+  void filterSearchResults(String query) {
+    _filteredList.clear();
+    if (query.isNotEmpty) {
+      _products.forEach((element) {
+        if (element.name.toLowerCase().contains(query.toLowerCase())) {
+          _filteredList.add(element);
+        }
+      });
+    }
+
+    setState(() {});
   }
 }
