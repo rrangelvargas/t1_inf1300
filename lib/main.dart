@@ -3,6 +3,7 @@ import 'package:t1_inf1300/register.dart';
 import 'package:t1_inf1300/forgotpassword.dart';
 import 'package:t1_inf1300/home.dart';
 import 'package:t1_inf1300/StyledRaisedButton.dart';
+import 'package:t1_inf1300/StyledFlatButton.dart';
 
 void main() {
   runApp(MyApp());
@@ -50,23 +51,15 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: InputDecoration(labelText: 'Senha'),
             ),
             StyledRaisedButton(title: "Entrar", callback: _navigateToHome),
-            FlatButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => new ForgotPassword()));
-              },
-              child: Text(
-                "Esqueci a senha",
-              ),
+            StyledFlatButton(
+              title: "Esqueci a senha",
+              callback: _navigateToForgotPassword,
+              fontSize: 12,
             ),
-            FlatButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => new Register()));
-              },
-              child: Text(
-                "Cadastre-se",
-              ),
+            StyledFlatButton(
+              title: "Cadastre-se",
+              callback: _navigateToRegister,
+              fontSize: 16,
             )
           ],
         ),
@@ -77,5 +70,15 @@ class _MyHomePageState extends State<MyHomePage> {
   void _navigateToHome() {
     Navigator.of(context).push(
         MaterialPageRoute(builder: (BuildContext context) => new HomePage()));
+  }
+
+  void _navigateToRegister() {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (BuildContext context) => new Register()));
+  }
+
+  void _navigateToForgotPassword() {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) => new ForgotPassword()));
   }
 }
