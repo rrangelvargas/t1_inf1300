@@ -79,7 +79,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   _logout() {
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (BuildContext context) => new MyApp()));
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (BuildContext context) => new MyApp()),
+        (Route<dynamic> route) => false);
   }
 }

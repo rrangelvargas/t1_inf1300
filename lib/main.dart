@@ -79,8 +79,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _navigateToHome() {
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (BuildContext context) => new HomePage()));
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (BuildContext context) => new HomePage()),
+        (Route<dynamic> route) => false);
   }
 
   void _navigateToRegister() {
