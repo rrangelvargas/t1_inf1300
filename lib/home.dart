@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/newrequestfragment.dart';
 import 'package:t1_inf1300/cart.dart';
+import 'package:t1_inf1300/order.dart';
 
 class HomePage extends StatefulWidget {
   String title = 'Pharma +';
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage> {
       case 0:
         return new NewRequest();
       case 1:
-        return;
+        return new Order();
       case 2:
         return;
       case 3:
