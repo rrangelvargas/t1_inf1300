@@ -21,7 +21,7 @@ class _OrderState extends State<Order> {
   Widget build(BuildContext context) {
     var price = _getTotalPrice();
     var temp = double.parse(price) + 10.0;
-    var price_with_tax = '$temp';
+    var priceWithTax = '$temp';
 
     return Scaffold(
       appBar: AppBar(
@@ -35,14 +35,14 @@ class _OrderState extends State<Order> {
             padding: EdgeInsets.all(18),
             decoration: BoxDecoration(color: Theme.of(context).primaryColor),
             child: ButtonTheme(
-              minWidth: 500,
+              minWidth: MediaQuery.of(context).size.width,
               child: FlatButton(
                 onPressed: () {},
                 child: Text(
                     'Valor total dos produtos: ' +
                         price +
                         '\n\nTaxa de entrega: 10.0 \n\nTotal do pedido: ' +
-                        price_with_tax,
+                        priceWithTax,
                     style: TextStyle(
                         fontSize: 18,
                         color: Theme.of(context).colorScheme.onBackground)),
