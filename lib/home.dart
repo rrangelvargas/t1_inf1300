@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/newrequestfragment.dart';
-import 'package:t1_inf1300/order.dart';
 import 'package:t1_inf1300/MyOrders.dart';
+import 'package:t1_inf1300/main.dart';
 
 class HomePage extends StatefulWidget {
   HomePage();
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             // ListTile(
-            //   title: Text('Meus Pedidos'),
+            //   title: Text('Perfil'),
             //   onTap: () {
             //     _onSelectItem(2);
             //   },
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text('Sair'),
               onTap: () {
-                _onSelectItem(3, '');
+                _logout();
               },
             ),
           ],
@@ -76,5 +76,10 @@ class _HomePageState extends State<HomePage> {
     setState(() => {_selectedIndex = index});
     setState(() => {this.title = title});
     Navigator.of(context).pop();
+  }
+
+  _logout() {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (BuildContext context) => new MyApp()));
   }
 }
