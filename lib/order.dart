@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/Product.dart';
+import 'package:t1_inf1300/StyledListTile.dart';
 
 class Order extends StatefulWidget {
   Order();
@@ -62,11 +63,16 @@ class _OrderState extends State<Order> {
   }
 
   _buildRow(int index) {
-    return ListTile(
-      title: Text(this._products[index].name),
-      leading: Text(this._products[index].image),
-      trailing: Text(this._products[index].price),
-    );
+    return StyledListTile(
+        title: this._products[index].name,
+        subtitle: this._products[index].description,
+        leading: this._products[index].image,
+        trailing: this._products[index].price);
+    // return ListTile(
+    //   title: Text(this._products[index].name),
+    //   leading: Text(this._products[index].image),
+    //   trailing: Text(this._products[index].price),
+    // );
   }
 
   String _getTotalPrice() {
