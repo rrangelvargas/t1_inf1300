@@ -12,7 +12,7 @@ class NewRequest extends StatefulWidget {
 
 class _NewRequestState extends State<NewRequest> {
   List<Product> _products = List<Product>();
-
+  String search = '';
   @override
   void initState() {
     super.initState();
@@ -29,7 +29,9 @@ class _NewRequestState extends State<NewRequest> {
             padding: const EdgeInsets.all(10.0),
             child: TextField(
               onChanged: (value) {
-                //filterSearchResults(value);
+                setState(() {
+                  search = value;
+                });
               },
               //controller: editingController,
               decoration: InputDecoration(
@@ -39,30 +41,34 @@ class _NewRequestState extends State<NewRequest> {
                       borderRadius: BorderRadius.all(Radius.circular(15.0)))),
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: _products.length,
-                itemBuilder: (BuildContext context, int index) {
-                  Product product = _products[index];
-                  return GestureDetector(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (_) {
-                              return AddProduct(product: product);
-                            });
-                      },
-                      child: _buildRow(product));
-                }),
-          ),
-          RaisedButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => new Cart()));
-            },
-            child:
-                Text('Adicionar ao carrinho', style: TextStyle(fontSize: 20)),
-          ),
+          search.isEmpty
+              ? Text('Pesquise para encontrar produtos')
+              : Expanded(
+                  child: ListView.builder(
+                      itemCount: _products.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        Product product = _products[index];
+                        return GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (_) {
+                                    return AddProduct(product: product);
+                                  });
+                            },
+                            child: _buildRow(product));
+                      }),
+                ),
+          search.isEmpty
+              ? Text("")
+              : RaisedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => new Cart()));
+                  },
+                  child: Text('Adicionar ao carrinho',
+                      style: TextStyle(fontSize: 20)),
+                ),
         ],
       )),
     );
