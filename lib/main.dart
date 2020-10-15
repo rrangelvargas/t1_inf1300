@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t1_inf1300/register.dart';
 import 'package:t1_inf1300/forgotpassword.dart';
 import 'package:t1_inf1300/home.dart';
+import 'package:t1_inf1300/StyledButtonOne.dart';
 
 void main() {
   runApp(MyApp());
@@ -48,13 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
             TextFormField(
               decoration: InputDecoration(labelText: 'Senha'),
             ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => new HomePage()));
-              },
-              child: const Text('Entrar', style: TextStyle(fontSize: 20)),
-            ),
+            StyleButtonOne(title: "Entrar", callback: _navigateToHome),
             FlatButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -77,5 +72,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  void _navigateToHome() {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (BuildContext context) => new HomePage()));
   }
 }
