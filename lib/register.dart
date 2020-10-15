@@ -13,6 +13,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text("Cadastro"),
       ),
@@ -44,7 +45,10 @@ class _RegisterState extends State<Register> {
               textInputType: TextInputType.visiblePassword,
               obscureText: true,
             ),
-            StyledRaisedButton(title: "Registrar", callback: _register)
+            Container(
+                padding: EdgeInsets.symmetric(vertical: 20.0),
+                child:
+                    StyledRaisedButton(title: "Registrar", callback: _register))
           ],
         ),
       ),

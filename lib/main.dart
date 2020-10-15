@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -57,7 +58,10 @@ class _MyHomePageState extends State<MyHomePage> {
               textInputType: TextInputType.visiblePassword,
               obscureText: true,
             ),
-            StyledRaisedButton(title: "Entrar", callback: _navigateToHome),
+            Container(
+                padding: EdgeInsets.symmetric(vertical: 20.0),
+                child: StyledRaisedButton(
+                    title: "Entrar", callback: _navigateToHome)),
             StyledFlatButton(
               title: "Esqueci a senha",
               callback: _navigateToForgotPassword,
