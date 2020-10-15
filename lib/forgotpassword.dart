@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t1_inf1300/StyledButtonOne.dart';
 
 class ForgotPassword extends StatefulWidget {
   ForgotPassword();
@@ -24,14 +25,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             TextFormField(
               decoration: InputDecoration(labelText: 'Email'),
             ),
-            RaisedButton(
-              onPressed: () {},
-              child:
-                  const Text('Recuperar senha', style: TextStyle(fontSize: 20)),
-            ),
+            StyleButtonOne(title: "Recuperar senha", callback: _forgotPassword),
           ],
         ),
       ),
     );
   }
+
+  void _forgotPassword() {}
 }

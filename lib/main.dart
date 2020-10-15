@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pharma +',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          fontFamily: 'Roboto'),
       home: MyHomePage(title: 'Login'),
     );
   }

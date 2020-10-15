@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t1_inf1300/StyledButtonOne.dart';
 
 class Register extends StatefulWidget {
   Register();
@@ -30,13 +31,12 @@ class _RegisterState extends State<Register> {
             TextFormField(
               decoration: InputDecoration(labelText: 'Confirmar senha'),
             ),
-            RaisedButton(
-              onPressed: () {},
-              child: const Text('Registrar', style: TextStyle(fontSize: 20)),
-            ),
+            StyleButtonOne(title: "Registrar", callback: _register)
           ],
         ),
       ),
     );
   }
+
+  void _register() {}
 }
