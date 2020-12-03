@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t1_inf1300/newrequestfragment.dart';
 import 'package:t1_inf1300/MyOrders.dart';
 import 'package:t1_inf1300/main.dart';
+import 'dart:io';
 
 class HomePage extends StatefulWidget {
   HomePage();
@@ -11,34 +12,61 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String title = 'Novo Pedido';
+  String title = "Novo Pedido";
+  String menuLabelText = "";
+  String newOrderLabelText = "";
+  String myOrdersLabelText = "";
+  String exitLabelText = "";
+  String locale = "";
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    locale = Platform.localeName.substring(0, 2);
+
+    if (locale == "pt") {
+      this.title = "Novo Pedido";
+      this.menuLabelText = "Menu";
+      this.newOrderLabelText = "Novo Pedido";
+      this.myOrdersLabelText = "Meus Pedidos";
+      this.exitLabelText = "Sair";
+    } else if (locale == "es") {
+      this.title = "Nuevo Pedido";
+      this.menuLabelText = "Menú";
+      this.newOrderLabelText = "Nuevo Pedido";
+      this.myOrdersLabelText = "Mis Pedidos";
+      this.exitLabelText = "Sal";
+    } else {
+      this.title = "New Order";
+      this.menuLabelText = "Menu";
+      this.newOrderLabelText = "New Order";
+      this.myOrdersLabelText = "My Orders";
+      this.exitLabelText = "Exit";
+    }
+
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: Text(this.title)),
       body: _getDrawerItem(_selectedIndex),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Drawer Header'),
+              child: Text(this.menuLabelText),
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
             ),
             ListTile(
-              title: Text('Novo Pedido'),
+              title: Text(this.newOrderLabelText),
               onTap: () {
-                _onSelectItem(0, 'Novo Pedido');
+                _onSelectItem(0, this.newOrderLabelText);
               },
             ),
             ListTile(
-              title: Text('Meus Pedidos'),
+              title: Text(this.myOrdersLabelText),
               onTap: () {
-                _onSelectItem(1, 'Meus Pedidos');
+                _onSelectItem(1, this.myOrdersLabelText);
               },
             ),
             // ListTile(
@@ -48,7 +76,7 @@ class _HomePageState extends State<HomePage> {
             //   },
             // ),
             ListTile(
-              title: Text('Sair'),
+              title: Text(this.exitLabelText),
               onTap: () {
                 _logout();
               },

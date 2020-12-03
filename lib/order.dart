@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/Product.dart';
 import 'package:t1_inf1300/StyledListTile.dart';
+import 'dart:io';
 
 class Order extends StatefulWidget {
   Order();
@@ -12,6 +13,11 @@ class Order extends StatefulWidget {
 class _OrderState extends State<Order> {
   List<Product> _products = List<Product>();
 
+  String myOrdersLabelText = "";
+  String totalValueLabelText = "";
+  String deliveryFeeLabelText = "";
+  String locale = "";
+
   @override
   void initState() {
     super.initState();
@@ -20,13 +26,30 @@ class _OrderState extends State<Order> {
 
   @override
   Widget build(BuildContext context) {
+    locale = Platform.localeName.substring(0, 2);
+
+    if (locale == "pt") {
+      this.myOrdersLabelText = "Meus pedidos";
+      this.totalValueLabelText = "Valor total dos produtos: ";
+      this.deliveryFeeLabelText =
+          "'\n\nTaxa de entrega: 10.0 \n\nTotal do pedido: ";
+    } else if (locale == "es") {
+      this.myOrdersLabelText = "Mis pedidos";
+      this.totalValueLabelText = "Valor total de productos: ";
+      this.deliveryFeeLabelText = "\n\nGastos de envío: 10.0 \n\nTotal: ";
+    } else {
+      this.myOrdersLabelText = "My Orders";
+      this.totalValueLabelText = "Total products' value: ";
+      this.deliveryFeeLabelText = "\n\nDelivery Fee: 10.0 \n\nTotal: ";
+    }
+
     var price = _getTotalPrice();
     var temp = double.parse(price) + 10.0;
     var priceWithTax = '$temp';
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Meus pedidos"),
+        title: Text(this.myOrdersLabelText),
       ),
       body: ListView.builder(
           itemCount: this._products.length,
@@ -40,9 +63,9 @@ class _OrderState extends State<Order> {
               child: FlatButton(
                 onPressed: () {},
                 child: Text(
-                    'Valor total dos produtos: ' +
+                    this.totalValueLabelText +
                         price +
-                        '\n\nTaxa de entrega: 10.0 \n\nTotal do pedido: ' +
+                        this.deliveryFeeLabelText +
                         priceWithTax,
                     style: TextStyle(
                         fontSize: 18,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:t1_inf1300/register.dart';
 import 'package:t1_inf1300/forgotpassword.dart';
 import 'package:t1_inf1300/home.dart';
@@ -35,8 +36,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String passwordLabelText = "";
+  String enterLabelText = "";
+  String forgotPasswordLabelText = "";
+  String registerLabelText = "";
+  String locale = "";
+
   @override
   Widget build(BuildContext context) {
+    locale = Platform.localeName.substring(0, 2);
+
+    if (locale == "pt") {
+      this.passwordLabelText = "Senha";
+      this.enterLabelText = "Entrar";
+      this.forgotPasswordLabelText = "Esqueci a senha";
+      this.registerLabelText = "Cadastre-se";
+    } else if (locale == "es") {
+      this.passwordLabelText = "Contraseña";
+      this.enterLabelText = "Iniciar Sesión";
+      this.forgotPasswordLabelText = "Olvidé la Contraseña";
+      this.registerLabelText = "Registrarse";
+    } else {
+      this.passwordLabelText = "Password";
+      this.enterLabelText = "Enter";
+      this.forgotPasswordLabelText = "Forgot my password";
+      this.registerLabelText = "Register";
+    }
+
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
@@ -53,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
               obscureText: false,
             ),
             StyledTextFormField(
-              labelText: 'Senha',
+              labelText: this.passwordLabelText,
               maxLines: 1,
               textInputType: TextInputType.visiblePassword,
               obscureText: true,
@@ -61,14 +87,14 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
                 padding: EdgeInsets.symmetric(vertical: 20.0),
                 child: StyledRaisedButton(
-                    title: "Entrar", callback: _navigateToHome)),
+                    title: this.enterLabelText, callback: _navigateToHome)),
             StyledFlatButton(
-              title: "Esqueci a senha",
+              title: this.forgotPasswordLabelText,
               callback: _navigateToForgotPassword,
               fontSize: 12,
             ),
             StyledFlatButton(
-              title: "Cadastre-se",
+              title: this.registerLabelText,
               callback: _navigateToRegister,
               fontSize: 16,
             )

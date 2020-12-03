@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/Product.dart';
 import 'package:t1_inf1300/order.dart';
+import 'dart:io';
 
 class MyOrders extends StatefulWidget {
   MyOrders();
@@ -12,6 +13,10 @@ class MyOrders extends StatefulWidget {
 class _MyOrdersState extends State<MyOrders> {
   List<Product> _products = List<Product>();
 
+  String noOrdersLabelText = "";
+  String waitingLabelText = "";
+  String locale = "";
+
   @override
   void initState() {
     super.initState();
@@ -20,12 +25,25 @@ class _MyOrdersState extends State<MyOrders> {
 
   @override
   Widget build(BuildContext buildContext) {
+    locale = Platform.localeName.substring(0, 2);
+
+    if (locale == "pt") {
+      this.noOrdersLabelText = "Você não fez nenhum pedido";
+      this.waitingLabelText = "Aguardando";
+    } else if (locale == "es") {
+      this.noOrdersLabelText = "No ha realizado ningún pedido";
+      this.waitingLabelText = "Esperando";
+    } else {
+      this.noOrdersLabelText = "You have not placed any orders";
+      this.waitingLabelText = "Awaiting";
+    }
+
     return Scaffold(
       body: Container(
         child: Column(
           children: <Widget>[
             _products.isEmpty
-                ? Text('Você não fez nenhum pedido')
+                ? Text(this.noOrdersLabelText)
                 : Expanded(
                     child: ListView.builder(
                         itemCount: _products.length,
@@ -97,7 +115,7 @@ class _MyOrdersState extends State<MyOrders> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text('RS ${product.price}'),
-                Text("Aguardando")
+                Text(this.waitingLabelText)
               ],
             ),
           ),

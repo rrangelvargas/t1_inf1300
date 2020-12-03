@@ -3,6 +3,7 @@ import 'package:t1_inf1300/Product.dart';
 import 'package:t1_inf1300/AddProduct.dart';
 import 'package:t1_inf1300/cart.dart';
 import 'package:t1_inf1300/StyledRaisedButtonLong.dart';
+import 'dart:io';
 
 class NewRequest extends StatefulWidget {
   NewRequest();
@@ -14,6 +15,12 @@ class NewRequest extends StatefulWidget {
 class _NewRequestState extends State<NewRequest> {
   List<Product> _products = List<Product>();
   List<Product> _filteredList = List<Product>();
+
+  String searchLabelText = "";
+  String searchHelpLabelText = "";
+  String addToCartLabelText = "";
+  String locale = "";
+
   @override
   void initState() {
     super.initState();
@@ -22,6 +29,22 @@ class _NewRequestState extends State<NewRequest> {
 
   @override
   Widget build(BuildContext buildContext) {
+    locale = Platform.localeName.substring(0, 2);
+
+    if (locale == "pt") {
+      this.searchLabelText = "Buscar";
+      this.searchHelpLabelText = "Pesquise para encontrar produtos";
+      this.addToCartLabelText = "Adicionar ao carrinho";
+    } else if (locale == "es") {
+      this.searchLabelText = "No ha realizado ningún pedido";
+      this.searchHelpLabelText = "Buscar para encontrar productos";
+      this.addToCartLabelText = "Añadir al carrito";
+    } else {
+      this.searchLabelText = "Search";
+      this.searchHelpLabelText = "Search to find products";
+      this.addToCartLabelText = "Add to cart";
+    }
+
     var width = MediaQuery.of(context).size.width * 0.8;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -38,7 +61,7 @@ class _NewRequestState extends State<NewRequest> {
               },
               //controller: editingController,
               decoration: InputDecoration(
-                  hintText: "Search",
+                  hintText: this.searchLabelText,
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15.0)))),
@@ -49,7 +72,7 @@ class _NewRequestState extends State<NewRequest> {
                   width: width,
                   padding: EdgeInsets.symmetric(vertical: 40.0),
                   child: Text(
-                    'Pesquise para encontrar produtos',
+                    this.searchHelpLabelText,
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.center,
                   ))
@@ -72,7 +95,7 @@ class _NewRequestState extends State<NewRequest> {
           _filteredList.isEmpty
               ? Text("")
               : StyledRaisedButtonLong(
-                  title: 'Adicionar ao carrinho', callback: _navigateToCart)
+                  title: this.addToCartLabelText, callback: _navigateToCart)
         ],
       )),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/Product.dart';
+import 'dart:io';
 
 class AddProduct extends StatefulWidget {
   final Product product;
@@ -10,6 +11,12 @@ class AddProduct extends StatefulWidget {
 }
 
 class _AddProductState extends State<AddProduct> {
+  String addItemLabelText = "";
+  String cancelLabelText = "";
+  String pharmacyLabelText = "";
+  String quantityLabelText = "";
+  String locale = "";
+
   int _quantity = 0;
 
   void _addQuantity() {
@@ -26,13 +33,32 @@ class _AddProductState extends State<AddProduct> {
 
   @override
   Widget build(BuildContext context) {
+    locale = Platform.localeName.substring(0, 2);
+
+    if (locale == "pt") {
+      this.addItemLabelText = "Adicionar";
+      this.cancelLabelText = "Cancelar";
+      this.pharmacyLabelText = "Farmácia";
+      this.quantityLabelText = "Quantidade:";
+    } else if (locale == "es") {
+      this.addItemLabelText = "Añadir";
+      this.cancelLabelText = "Cancelar";
+      this.pharmacyLabelText = "Farmacia";
+      this.quantityLabelText = "Cantidad:";
+    } else {
+      this.addItemLabelText = "Add";
+      this.cancelLabelText = "Cancel";
+      this.pharmacyLabelText = "Pharmacy";
+      this.quantityLabelText = "Quantity:";
+    }
+
     Widget addButton = FlatButton(
-      child: Text("Adicionar"),
+      child: Text(this.addItemLabelText),
       onPressed: () {},
     );
 
     Widget cancelaButton = FlatButton(
-      child: Text("Cancelar"),
+      child: Text(this.cancelLabelText),
       onPressed: () {},
     );
 
@@ -57,7 +83,7 @@ class _AddProductState extends State<AddProduct> {
                   Column(
                     children: <Widget>[
                       Text(widget.product.name),
-                      Text("Farmacia")
+                      Text(this.pharmacyLabelText)
                     ],
                   )
                 ],
@@ -65,7 +91,7 @@ class _AddProductState extends State<AddProduct> {
               Text(widget.product.description),
               Row(
                 children: <Widget>[
-                  Text("Quantidade:"),
+                  Text(this.quantityLabelText),
                   IconButton(
                       icon: Icon(Icons.remove_circle),
                       onPressed: _removeQuantity),

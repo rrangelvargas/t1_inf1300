@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t1_inf1300/Product.dart';
 import 'package:t1_inf1300/StyledListTile.dart';
 import 'package:t1_inf1300/StyledRaisedButtonLong.dart';
+import 'dart:io';
 
 class Cart extends StatefulWidget {
   Cart();
@@ -13,6 +14,11 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   List<Product> _products = List<Product>();
 
+  String cartLabelText = "";
+  String totalLabelText = "";
+  String checkoutLabelText = "";
+  String locale = "";
+
   @override
   void initState() {
     super.initState();
@@ -21,16 +27,33 @@ class _CartState extends State<Cart> {
 
   @override
   Widget build(BuildContext context) {
+    locale = Platform.localeName.substring(0, 2);
+
+    this.totalLabelText = "Total: ";
+
+    if (locale == "pt") {
+      this.cartLabelText = "Carrinho";
+      this.checkoutLabelText = " - Finalizar compra";
+    } else if (locale == "es") {
+      this.cartLabelText = "Carro";
+      this.checkoutLabelText = " - Revisa";
+    } else {
+      this.cartLabelText = "Cart";
+      this.checkoutLabelText = " - Checkout";
+    }
+
     return Scaffold(
         appBar: AppBar(
-          title: Text("Carrinho"),
+          title: Text(this.cartLabelText),
         ),
         body: ListView.builder(
             itemCount: this._products.length,
             itemBuilder: (context, index) => this._buildRow(index)),
         persistentFooterButtons: <Widget>[
           StyledRaisedButtonLong(
-              title: 'Total: ' + _getTotalPrice() + ' - Finalizar compra',
+              title: this.totalLabelText +
+                  _getTotalPrice() +
+                  this.checkoutLabelText,
               callback: _finishBuy)
         ]);
   }
