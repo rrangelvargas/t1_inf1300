@@ -6,6 +6,7 @@ import 'package:t1_inf1300/home.dart';
 import 'package:t1_inf1300/StyledRaisedButton.dart';
 import 'package:t1_inf1300/StyledFlatButton.dart';
 import 'package:t1_inf1300/StyledTextFormField.dart';
+import 'package:t1_inf1300/controller/controller.dart';
 
 void main() {
   runApp(MyApp());
@@ -42,16 +43,18 @@ class _MyHomePageState extends State<MyHomePage> {
   String registerLabelText = "";
   String locale = "";
 
+  final controller = Controller();
+
   @override
   Widget build(BuildContext context) {
-    locale = Platform.localeName.substring(0, 2);
+    //locale = Platform.localeName.substring(0, 2);
 
-    if (locale == "pt") {
+    if (controller.locale.value == "pt") {
       this.passwordLabelText = "Senha";
       this.enterLabelText = "Entrar";
       this.forgotPasswordLabelText = "Esqueci a senha";
       this.registerLabelText = "Cadastre-se";
-    } else if (locale == "es") {
+    } else if (controller.locale.value == "es") {
       this.passwordLabelText = "Contraseña";
       this.enterLabelText = "Iniciar Sesión";
       this.forgotPasswordLabelText = "Olvidé la Contraseña";
