@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t1_inf1300/Product.dart';
+import 'file:///C:/Users/tgome/Documents/BitBucket/Flutter/t1_inf1300/lib/model/Product.dart';
 import 'package:t1_inf1300/AddProduct.dart';
 import 'package:t1_inf1300/cart.dart';
 import 'package:t1_inf1300/StyledRaisedButtonLong.dart';

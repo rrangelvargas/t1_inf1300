@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:t1_inf1300/register.dart';
 import 'package:t1_inf1300/forgotpassword.dart';
 import 'package:t1_inf1300/home.dart';
@@ -7,8 +6,14 @@ import 'package:t1_inf1300/StyledRaisedButton.dart';
 import 'package:t1_inf1300/StyledFlatButton.dart';
 import 'package:t1_inf1300/StyledTextFormField.dart';
 import 'package:t1_inf1300/controller/controller.dart';
+import 'package:t1_inf1300/notification/notificationManager.dart';
+import 'package:android_alarm_manager/android_alarm_manager.dart';
 
-void main() {
+NotificationManager n = new NotificationManager();
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AndroidAlarmManager.initialize();
   runApp(MyApp());
 }
 
@@ -44,6 +49,20 @@ class _MyHomePageState extends State<MyHomePage> {
   String locale = "";
 
   final controller = Controller();
+
+  @override
+  void initState() {
+    super.initState();
+    // AndroidAlarmManager.oneShotAt(
+    //     DateTime.now().add(Duration(seconds: 5)), 0, notificate,
+    //     exact: true,
+    //     allowWhileIdle: true,
+    //     wakeup: true,
+    //     rescheduleOnReboot: true,
+    //     alarmClock: true);
+
+    n.initializing();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             StyledFlatButton(
               title: this.registerLabelText,
-              callback: _navigateToRegister,
+              callback: notificate,
               fontSize: 16,
             )
           ],
@@ -121,5 +140,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void _navigateToForgotPassword() {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) => new ForgotPassword()));
+  }
+
+  void notificate() async {
+    await n.notification();
   }
 }
