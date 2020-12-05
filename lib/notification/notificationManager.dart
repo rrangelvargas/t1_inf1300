@@ -19,7 +19,7 @@ class NotificationManager {
         onSelectNotification: onSelectNotification);
   }
 
-  Future<void> notification() async {
+  Future<void> notification(String title, String description) async {
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
             'Channel ID', 'Channel title', 'channel body',
@@ -32,10 +32,10 @@ class NotificationManager {
     NotificationDetails notificationDetails = NotificationDetails(
         android: androidNotificationDetails, iOS: iosNotificationDetails);
     await flutterLocalNotificationsPlugin.show(
-        0, 'Hello there', 'please subscribe my channel', notificationDetails);
+        0, title, description, notificationDetails);
   }
 
-  Future<void> notificationAfterSec() async {
+  Future<void> notificationAfterSec(String title, String description) async {
     var timeDelayed = DateTime.now().add(Duration(seconds: 5));
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
@@ -48,16 +48,14 @@ class NotificationManager {
 
     NotificationDetails notificationDetails = NotificationDetails(
         android: androidNotificationDetails, iOS: iosNotificationDetails);
-    await flutterLocalNotificationsPlugin.schedule(1, 'Hello there',
-        'please subscribe my channel', timeDelayed, notificationDetails);
+    await flutterLocalNotificationsPlugin.schedule(
+        1, title, description, timeDelayed, notificationDetails);
   }
 
   Future onSelectNotification(String payLoad) {
     if (payLoad != null) {
       print(payLoad);
     }
-
-    // we can set navigator to navigate another screen
   }
 
   Future onDidReceiveLocalNotification(
@@ -75,26 +73,4 @@ class NotificationManager {
       ],
     );
   }
-
-  // void initNotificationManager() {
-  //   initializationSettingsAndroid =
-  //       new AndroidInitializationSettings('@mipmap/ic_launcher');
-  //   initializationSettingsIOS = new IOSInitializationSettings();
-  //   initializationSettings = new InitializationSettings(
-  //       android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-  //   flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
-  //   flutterLocalNotificationsPlugin.initialize(initializationSettings);
-  // }
-  //
-  // Future showNotificationWithDefaultSound(String title, String body) async {
-  //   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-  //       'your channel id', 'your channel name', 'your channel description',
-  //       importance: Importance.max, priority: Priority.high);
-  //   var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-  //   var platformChannelSpecifics = new NotificationDetails(
-  //       android: androidPlatformChannelSpecifics,
-  //       iOS: iOSPlatformChannelSpecifics);
-  //   await flutterLocalNotificationsPlugin.show(
-  //       0, title, body, platformChannelSpecifics);
-  // }
 }

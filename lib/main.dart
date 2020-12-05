@@ -117,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             StyledFlatButton(
               title: this.registerLabelText,
-              callback: notificate,
+              callback: _navigateToRegister,
               fontSize: 16,
             )
           ],
@@ -142,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context) => new ForgotPassword()));
   }
 
-  void notificate() async {
-    await n.notification();
+  void _notificate() async {
+    await n.notification("", "");
   }
 }
