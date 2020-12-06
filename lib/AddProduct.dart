@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/tgome/Documents/BitBucket/Flutter/t1_inf1300/lib/model/Product.dart';
+import 'package:t1_inf1300/model/Product.dart';
 import 'dart:io';
+import 'controller/controller.dart';
 
 class AddProduct extends StatefulWidget {
   final Product product;
@@ -18,6 +19,8 @@ class _AddProductState extends State<AddProduct> {
   String locale = "";
 
   int _quantity = 0;
+
+  final controller = Controller();
 
   void _addQuantity() {
     setState(() {
@@ -54,12 +57,19 @@ class _AddProductState extends State<AddProduct> {
 
     Widget addButton = FlatButton(
       child: Text(this.addItemLabelText),
-      onPressed: () {},
+      onPressed: () {
+        if (_quantity > 0) {
+          controller.addProduct(widget.product);
+          Navigator.pop(context);
+        }
+      },
     );
 
     Widget cancelaButton = FlatButton(
       child: Text(this.cancelLabelText),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pop(context);
+      },
     );
 
     var height = MediaQuery.of(context).size.height * 0.4;

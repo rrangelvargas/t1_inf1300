@@ -68,12 +68,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     //locale = Platform.localeName.substring(0, 2);
 
-    if (controller.locale.value == "pt") {
+    if (controller.locale == "pt") {
       this.passwordLabelText = "Senha";
       this.enterLabelText = "Entrar";
       this.forgotPasswordLabelText = "Esqueci a senha";
       this.registerLabelText = "Cadastre-se";
-    } else if (controller.locale.value == "es") {
+    } else if (controller.locale == "es") {
       this.passwordLabelText = "Contraseña";
       this.enterLabelText = "Iniciar Sesión";
       this.forgotPasswordLabelText = "Olvidé la Contraseña";

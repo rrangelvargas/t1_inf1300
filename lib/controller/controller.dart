@@ -1,21 +1,22 @@
 import "package:mobx/mobx.dart";
 import 'dart:io';
 
-import 'package:t1_inf1300/cart.dart';
 import 'package:t1_inf1300/model/Product.dart';
 
-class Controller {
-  var locale = Observable(Platform.localeName.substring(0, 2));
+part 'controller.g.dart';
 
-  var product = ObservableList<Product>.of([]);
+class Controller = ControllerBase with _$Controller;
 
-  _addProduct(Product el) {
-    product.add(el);
-  }
+abstract class ControllerBase with Store {
+  @observable
+  String locale = Platform.localeName.substring(0, 2);
 
-  Action addProduct;
+  @observable
+  List<Product> products = List.of([]);
 
-  Controller() {
-    addProduct = Action(_addProduct);
+  @action
+  addProduct(Product el) {
+    products.add(el);
+    print(products.length);
   }
 }
