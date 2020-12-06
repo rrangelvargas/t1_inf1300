@@ -36,7 +36,7 @@ class _AddProductState extends State<AddProduct> {
 
   @override
   Widget build(BuildContext context) {
-    locale = Platform.localeName.substring(0, 2);
+    locale = controller.locale;
 
     if (locale == "pt") {
       this.addItemLabelText = "Adicionar";
