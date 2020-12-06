@@ -21,7 +21,7 @@ class StyledRaisedButtonLong extends StatelessWidget {
           textColor: Colors.white,
           child: Text(title),
           onPressed:
-              isEnable ? () => callback : null // gives padding to the button
+              isEnable ? () => callback() : null // gives padding to the button
           ),
     );
   }

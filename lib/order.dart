@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/tgome/Documents/BitBucket/Flutter/t1_inf1300/lib/model/Product.dart';
 import 'package:t1_inf1300/StyledListTile.dart';
-import 'dart:io';
+import 'package:t1_inf1300/model/Product.dart';
+import 'controller/controller.dart';
+import 'package:provider/provider.dart';
 
 class Order extends StatefulWidget {
   Order();
@@ -11,12 +12,13 @@ class Order extends StatefulWidget {
 }
 
 class _OrderState extends State<Order> {
-  List<Product> _products = List<Product>();
+  List<Product> _products = List.of([]);
 
   String myOrdersLabelText = "";
   String totalValueLabelText = "";
   String deliveryFeeLabelText = "";
   String locale = "";
+  Controller controller;
 
   @override
   void initState() {
@@ -26,7 +28,8 @@ class _OrderState extends State<Order> {
 
   @override
   Widget build(BuildContext context) {
-    locale = Platform.localeName.substring(0, 2);
+    controller = Provider.of<Controller>(context);
+    locale = controller.locale;
 
     if (locale == "pt") {
       this.myOrdersLabelText = "Meus pedidos";
@@ -77,10 +80,13 @@ class _OrderState extends State<Order> {
   }
 
   void getProducts() async {
-    this._products.add(new Product(1, "Item 1", "20.00", "Item 1", "A"));
-    this._products.add(new Product(2, "Item 2", "10.00", "Item 2", "B"));
-    this._products.add(new Product(3, "Item 3", "18.00", "Item 3", "C"));
-    this._products.add(new Product(4, "Item 4", "21.00", "Item 4", "D"));
+    this._products = controller.products;
+
+    controller.products.forEach((element) => {this._products.add(element)});
+    // this._products.add(new Product(1, "Item 1", "20.00", "Item 1", "A"));
+    // this._products.add(new Product(2, "Item 2", "10.00", "Item 2", "B"));
+    // this._products.add(new Product(3, "Item 3", "18.00", "Item 3", "C"));
+    // this._products.add(new Product(4, "Item 4", "21.00", "Item 4", "D"));
 
     setState(() {});
   }

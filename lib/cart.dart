@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/tgome/Documents/BitBucket/Flutter/t1_inf1300/lib/model/Product.dart';
+import 'package:t1_inf1300/model/Product.dart';
 import 'package:t1_inf1300/StyledListTile.dart';
 import 'package:t1_inf1300/StyledRaisedButtonLong.dart';
-import 'dart:io';
+import 'controller/controller.dart';
+import 'package:provider/provider.dart';
 
 class Cart extends StatefulWidget {
   Cart();
@@ -18,18 +19,16 @@ class _CartState extends State<Cart> {
   String totalLabelText = "";
   String checkoutLabelText = "";
   String locale = "";
-
-  @override
-  void initState() {
-    super.initState();
-    getProducts();
-  }
+  Controller controller;
 
   @override
   Widget build(BuildContext context) {
-    locale = Platform.localeName.substring(0, 2);
+    controller = Provider.of<Controller>(context);
+    locale = controller.locale;
 
     this.totalLabelText = "Total: ";
+
+    getProducts();
 
     if (locale == "pt") {
       this.cartLabelText = "Carrinho";
@@ -58,12 +57,9 @@ class _CartState extends State<Cart> {
         ]);
   }
 
-  void getProducts() async {
-    this._products.add(new Product(1, "Item 1", "20.00", "Item 1", "A"));
-    this._products.add(new Product(2, "Item 2", "10.00", "Item 2", "B"));
-    this._products.add(new Product(3, "Item 3", "18.00", "Item 3", "C"));
-    this._products.add(new Product(4, "Item 4", "21.00", "Item 4", "D"));
-
+  void getProducts() {
+    controller.products.forEach((element) => {this._products.add(element)});
+    print(this._products.length);
     setState(() {});
   }
 
@@ -71,8 +67,8 @@ class _CartState extends State<Cart> {
     return StyledListTile(
         title: this._products[index].name,
         subtitle: this._products[index].description,
-        leading: this._products[index].image,
-        trailing: this._products[index].price);
+        leading: "",
+        trailing: "RS " + this._products[index].price);
   }
 
   String _getTotalPrice() {
