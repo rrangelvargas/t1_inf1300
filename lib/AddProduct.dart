@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:t1_inf1300/model/Product.dart';
 import 'dart:io';
 import 'controller/controller.dart';
@@ -19,9 +20,6 @@ class _AddProductState extends State<AddProduct> {
   String locale = "";
 
   int _quantity = 0;
-
-  final controller = Controller();
-
   void _addQuantity() {
     setState(() {
       _quantity++;
@@ -36,6 +34,7 @@ class _AddProductState extends State<AddProduct> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<Controller>(context);
     locale = controller.locale;
 
     if (locale == "pt") {

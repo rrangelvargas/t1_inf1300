@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:t1_inf1300/register.dart';
 import 'package:t1_inf1300/forgotpassword.dart';
 import 'package:t1_inf1300/home.dart';
@@ -21,13 +22,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pharma +',
-      theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          fontFamily: 'Roboto'),
-      home: MyHomePage(title: 'Login'),
+    return MultiProvider(
+      providers: [
+        Provider<Controller>(
+          create: (_) => Controller(),
+        )
+      ],
+      child: MaterialApp(
+        title: 'Pharma +',
+        theme: ThemeData(
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            fontFamily: 'Roboto'),
+        home: MyHomePage(title: 'Login'),
+      ),
     );
   }
 }

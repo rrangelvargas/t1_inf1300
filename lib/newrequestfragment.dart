@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:t1_inf1300/model/Product.dart';
 import 'package:t1_inf1300/AddProduct.dart';
 import 'package:t1_inf1300/cart.dart';
 import 'package:t1_inf1300/StyledRaisedButtonLong.dart';
-import 'dart:io';
+import 'controller/controller.dart';
+import 'package:provider/provider.dart';
 
 class NewRequest extends StatefulWidget {
   NewRequest();
@@ -29,7 +31,8 @@ class _NewRequestState extends State<NewRequest> {
 
   @override
   Widget build(BuildContext buildContext) {
-    locale = Platform.localeName.substring(0, 2);
+    final controller = Provider.of<Controller>(context);
+    locale = controller.locale;
 
     if (locale == "pt") {
       this.searchLabelText = "Buscar";
@@ -46,6 +49,7 @@ class _NewRequestState extends State<NewRequest> {
     }
 
     var width = MediaQuery.of(context).size.width * 0.8;
+    print(controller.products.length);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: Container(
@@ -92,10 +96,14 @@ class _NewRequestState extends State<NewRequest> {
                             child: _buildRow(product));
                       }),
                 ),
-          _filteredList.isEmpty
+          _filteredList.isEmpty & controller.productsIsEmpty
               ? Text("")
-              : StyledRaisedButtonLong(
-                  title: this.addToCartLabelText, callback: _navigateToCart)
+              : Observer(
+                  builder: (_) => StyledRaisedButtonLong(
+                      title: this.addToCartLabelText,
+                      callback: _navigateToCart,
+                      isEnable: !controller.productsIsEmpty),
+                )
         ],
       )),
     );

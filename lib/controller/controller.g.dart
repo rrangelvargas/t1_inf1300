@@ -9,6 +9,13 @@ part of 'controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Controller on ControllerBase, Store {
+  Computed<bool> _$productsIsEmptyComputed;
+
+  @override
+  bool get productsIsEmpty => (_$productsIsEmptyComputed ??=
+          Computed<bool>(() => super.productsIsEmpty))
+      .value;
+
   final _$localeAtom = Atom(name: 'ControllerBase.locale');
 
   @override
