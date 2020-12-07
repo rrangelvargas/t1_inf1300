@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/StyledListTile.dart';
+import 'package:t1_inf1300/localizations.dart';
 import 'package:t1_inf1300/model/Product.dart';
 import 'controller/controller.dart';
 import 'package:provider/provider.dart';
@@ -14,10 +15,6 @@ class Order extends StatefulWidget {
 class _OrderState extends State<Order> {
   List<Product> _products = List.of([]);
 
-  String myOrdersLabelText = "";
-  String totalValueLabelText = "";
-  String deliveryFeeLabelText = "";
-  String locale = "";
   Controller controller;
 
   @override
@@ -29,22 +26,6 @@ class _OrderState extends State<Order> {
   @override
   Widget build(BuildContext context) {
     controller = Provider.of<Controller>(context);
-    locale = controller.locale;
-
-    if (locale == "pt") {
-      this.myOrdersLabelText = "Meus pedidos";
-      this.totalValueLabelText = "Valor total dos produtos: ";
-      this.deliveryFeeLabelText =
-          "'\n\nTaxa de entrega: 10.0 \n\nTotal do pedido: ";
-    } else if (locale == "es") {
-      this.myOrdersLabelText = "Mis pedidos";
-      this.totalValueLabelText = "Valor total de productos: ";
-      this.deliveryFeeLabelText = "\n\nGastos de envío: 10.0 \n\nTotal: ";
-    } else {
-      this.myOrdersLabelText = "My Orders";
-      this.totalValueLabelText = "Total products' value: ";
-      this.deliveryFeeLabelText = "\n\nDelivery Fee: 10.0 \n\nTotal: ";
-    }
 
     var price = _getTotalPrice();
     var temp = double.parse(price) + 10.0;
@@ -52,7 +33,7 @@ class _OrderState extends State<Order> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(this.myOrdersLabelText),
+        title: Text(MyLocalizations.of(context).translate("myOrders")),
       ),
       body: ListView.builder(
           itemCount: this._products.length,
@@ -66,9 +47,9 @@ class _OrderState extends State<Order> {
               child: FlatButton(
                 onPressed: () {},
                 child: Text(
-                    this.totalValueLabelText +
+                    MyLocalizations.of(context).translate("totalValue") +
                         price +
-                        this.deliveryFeeLabelText +
+                        MyLocalizations.of(context).translate("deliveryFee") +
                         priceWithTax,
                     style: TextStyle(
                         fontSize: 18,

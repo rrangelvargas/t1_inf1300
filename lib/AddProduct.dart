@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:t1_inf1300/localizations.dart';
 import 'package:t1_inf1300/model/Product.dart';
-import 'dart:io';
 import 'controller/controller.dart';
 
 class AddProduct extends StatefulWidget {
@@ -13,12 +13,6 @@ class AddProduct extends StatefulWidget {
 }
 
 class _AddProductState extends State<AddProduct> {
-  String addItemLabelText = "";
-  String cancelLabelText = "";
-  String pharmacyLabelText = "";
-  String quantityLabelText = "";
-  String locale = "";
-
   int _quantity = 0;
   void _addQuantity() {
     setState(() {
@@ -35,27 +29,9 @@ class _AddProductState extends State<AddProduct> {
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<Controller>(context);
-    locale = controller.locale;
-
-    if (locale == "pt") {
-      this.addItemLabelText = "Adicionar";
-      this.cancelLabelText = "Cancelar";
-      this.pharmacyLabelText = "Farmácia";
-      this.quantityLabelText = "Quantidade:";
-    } else if (locale == "es") {
-      this.addItemLabelText = "Añadir";
-      this.cancelLabelText = "Cancelar";
-      this.pharmacyLabelText = "Farmacia";
-      this.quantityLabelText = "Cantidad:";
-    } else {
-      this.addItemLabelText = "Add";
-      this.cancelLabelText = "Cancel";
-      this.pharmacyLabelText = "Pharmacy";
-      this.quantityLabelText = "Quantity:";
-    }
 
     Widget addButton = FlatButton(
-      child: Text(this.addItemLabelText),
+      child: Text(MyLocalizations.of(context).translate("addItem")),
       onPressed: () {
         if (_quantity > 0) {
           controller.addProduct(widget.product);
@@ -65,7 +41,7 @@ class _AddProductState extends State<AddProduct> {
     );
 
     Widget cancelaButton = FlatButton(
-      child: Text(this.cancelLabelText),
+      child: Text(MyLocalizations.of(context).translate("cancel")),
       onPressed: () {
         Navigator.pop(context);
       },
@@ -92,7 +68,7 @@ class _AddProductState extends State<AddProduct> {
                   Column(
                     children: <Widget>[
                       Text(widget.product.name),
-                      Text(this.pharmacyLabelText)
+                      Text(MyLocalizations.of(context).translate("pharmacy"))
                     ],
                   )
                 ],
@@ -100,7 +76,7 @@ class _AddProductState extends State<AddProduct> {
               Text(widget.product.description),
               Row(
                 children: <Widget>[
-                  Text(this.quantityLabelText),
+                  Text(MyLocalizations.of(context).translate("quantity")),
                   IconButton(
                       icon: Icon(Icons.remove_circle),
                       onPressed: _removeQuantity),

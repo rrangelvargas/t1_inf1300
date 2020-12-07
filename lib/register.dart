@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/StyledRaisedButton.dart';
 import 'package:t1_inf1300/StyledTextFormField.dart';
-import 'dart:io';
+import 'package:t1_inf1300/localizations.dart';
 
 class Register extends StatefulWidget {
   Register();
@@ -11,48 +11,19 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  String registerLabelText = "";
-  String nameLabelText = "";
-  String passwordLabelText = "";
-  String confirmPasswordLabeltext = "";
-  String confirmRegisterLabelText = "";
-  String locale = "";
-
   @override
   Widget build(BuildContext context) {
-    locale = Platform.localeName.substring(0, 2);
-
-    if (locale == "pt") {
-      this.registerLabelText = "Cadastro";
-      this.nameLabelText = "Nome";
-      this.passwordLabelText = "Senha";
-      this.confirmPasswordLabeltext = "Confirmar senha";
-      this.confirmRegisterLabelText = "Registrar";
-    } else if (locale == "es") {
-      this.registerLabelText = "Registrarse";
-      this.nameLabelText = "Nombre";
-      this.passwordLabelText = "Contraseña";
-      this.confirmPasswordLabeltext = "Confirmar Seña";
-      this.confirmRegisterLabelText = "Finalizar el registro";
-    } else {
-      this.registerLabelText = "Register";
-      this.nameLabelText = "Name";
-      this.passwordLabelText = "Password";
-      this.confirmPasswordLabeltext = "Confirm Password";
-      this.confirmRegisterLabelText = "Finnish registration";
-    }
-
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
-        title: Text(this.registerLabelText),
+        title: Text(MyLocalizations.of(context).translate("registerLabel")),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             StyledTextFormField(
-              labelText: this.nameLabelText,
+              labelText: MyLocalizations.of(context).translate("nameLabel"),
               maxLines: 1,
               textInputType: TextInputType.name,
               obscureText: false,
@@ -64,13 +35,14 @@ class _RegisterState extends State<Register> {
               obscureText: false,
             ),
             StyledTextFormField(
-              labelText: this.passwordLabelText,
+              labelText: MyLocalizations.of(context).translate("password"),
               maxLines: 1,
               textInputType: TextInputType.visiblePassword,
               obscureText: true,
             ),
             StyledTextFormField(
-              labelText: this.confirmPasswordLabeltext,
+              labelText:
+                  MyLocalizations.of(context).translate("confirmPassword"),
               maxLines: 1,
               textInputType: TextInputType.visiblePassword,
               obscureText: true,
@@ -78,7 +50,9 @@ class _RegisterState extends State<Register> {
             Container(
                 padding: EdgeInsets.symmetric(vertical: 20.0),
                 child: StyledRaisedButton(
-                    title: this.confirmRegisterLabelText, callback: _register))
+                    title: MyLocalizations.of(context)
+                        .translate("confirmRegistration"),
+                    callback: _register))
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:t1_inf1300/localizations.dart';
 import 'package:t1_inf1300/model/Product.dart';
 import 'package:t1_inf1300/AddProduct.dart';
 import 'package:t1_inf1300/cart.dart';
@@ -18,11 +19,6 @@ class _NewRequestState extends State<NewRequest> {
   List<Product> _products = List<Product>();
   List<Product> _filteredList = List<Product>();
 
-  String searchLabelText = "";
-  String searchHelpLabelText = "";
-  String addToCartLabelText = "";
-  String locale = "";
-
   @override
   void initState() {
     super.initState();
@@ -32,21 +28,6 @@ class _NewRequestState extends State<NewRequest> {
   @override
   Widget build(BuildContext buildContext) {
     final controller = Provider.of<Controller>(context);
-    locale = controller.locale;
-
-    if (locale == "pt") {
-      this.searchLabelText = "Buscar";
-      this.searchHelpLabelText = "Pesquise para encontrar produtos";
-      this.addToCartLabelText = "Adicionar ao carrinho";
-    } else if (locale == "es") {
-      this.searchLabelText = "No ha realizado ningún pedido";
-      this.searchHelpLabelText = "Buscar para encontrar productos";
-      this.addToCartLabelText = "Añadir al carrito";
-    } else {
-      this.searchLabelText = "Search";
-      this.searchHelpLabelText = "Search to find products";
-      this.addToCartLabelText = "Add to cart";
-    }
 
     var width = MediaQuery.of(context).size.width * 0.8;
     print(controller.products.length);
@@ -65,7 +46,7 @@ class _NewRequestState extends State<NewRequest> {
               },
               //controller: editingController,
               decoration: InputDecoration(
-                  hintText: this.searchLabelText,
+                  hintText: MyLocalizations.of(context).translate("search"),
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15.0)))),
@@ -76,7 +57,7 @@ class _NewRequestState extends State<NewRequest> {
                   width: width,
                   padding: EdgeInsets.symmetric(vertical: 40.0),
                   child: Text(
-                    this.searchHelpLabelText,
+                    MyLocalizations.of(context).translate("searchHelp"),
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.center,
                   ))
@@ -100,7 +81,7 @@ class _NewRequestState extends State<NewRequest> {
               ? Text("")
               : Observer(
                   builder: (_) => StyledRaisedButtonLong(
-                      title: this.addToCartLabelText,
+                      title: MyLocalizations.of(context).translate("addToCart"),
                       callback: _navigateToCart,
                       isEnable: !controller.productsIsEmpty),
                 )

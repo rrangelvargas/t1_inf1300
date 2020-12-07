@@ -1,4 +1,8 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:t1_inf1300/register.dart';
 import 'package:t1_inf1300/forgotpassword.dart';
@@ -10,16 +14,44 @@ import 'package:t1_inf1300/controller/controller.dart';
 import 'package:t1_inf1300/notification/notificationManager.dart';
 import 'package:android_alarm_manager/android_alarm_manager.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:t1_inf1300/initialize_i18n.dart' show initializeI18n;
+import 'package:t1_inf1300/constant.dart' show languages;
+import 'package:t1_inf1300/localizations.dart'
+    show MyLocalizations, MyLocalizationsDelegate;
+
 NotificationManager n = new NotificationManager();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AndroidAlarmManager.initialize();
-  runApp(MyApp());
+  Map<String, Map<String, String>> localizedValues = await initializeI18n();
+  runApp(MyApp(localizedValues));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  final Map<String, Map<String, String>> localizedValues;
+  MyApp(this.localizedValues);
   // This widget is the root of your application.
+
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<MyApp> {
+  final controller = Controller();
+
+  onChangeLanguage() {
+    String _locale = Platform.localeName.substring(0, 2);
+    if (_locale == "en") {
+      controller.locale = "en";
+    } else if (_locale == "pt") {
+      controller.locale = "pt";
+    } else {
+      controller.locale = "es";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -34,29 +66,47 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             fontFamily: 'Roboto'),
-        home: MyHomePage(title: 'Login'),
+        locale: Locale(controller.locale),
+        localizationsDelegates: [
+          MyLocalizationsDelegate(widget.localizedValues),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: languages.map((language) => Locale(language, '')),
+        home:
+            MyHomePage(title: "Login", onChangeLanguage: this.onChangeLanguage),
       ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
   final String title;
+  final VoidCallback onChangeLanguage;
+  MyHomePage({this.title, this.onChangeLanguage});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String passwordLabelText = "";
-  String enterLabelText = "";
-  String forgotPasswordLabelText = "";
-  String registerLabelText = "";
-  String locale = "";
+  static const platform = const MethodChannel('samples.flutter.dev/battery');
 
-  final controller = Controller();
+  String _batteryLevel = 'Unknown battery level.';
+
+  Future<void> _getBatteryLevel() async {
+    String batteryLevel;
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+
+    setState(() {
+      _batteryLevel = batteryLevel;
+    });
+  }
 
   @override
   void initState() {
@@ -68,30 +118,13 @@ class _MyHomePageState extends State<MyHomePage> {
     //     wakeup: true,
     //     rescheduleOnReboot: true,
     //     alarmClock: true);
-
     n.initializing();
   }
 
   @override
   Widget build(BuildContext context) {
-    //locale = Platform.localeName.substring(0, 2);
-
-    if (controller.locale == "pt") {
-      this.passwordLabelText = "Senha";
-      this.enterLabelText = "Entrar";
-      this.forgotPasswordLabelText = "Esqueci a senha";
-      this.registerLabelText = "Cadastre-se";
-    } else if (controller.locale == "es") {
-      this.passwordLabelText = "Contraseña";
-      this.enterLabelText = "Iniciar Sesión";
-      this.forgotPasswordLabelText = "Olvidé la Contraseña";
-      this.registerLabelText = "Registrarse";
-    } else {
-      this.passwordLabelText = "Password";
-      this.enterLabelText = "Enter";
-      this.forgotPasswordLabelText = "Forgot my password";
-      this.registerLabelText = "Register";
-    }
+    this._getBatteryLevel();
+    print(this._batteryLevel);
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -109,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
               obscureText: false,
             ),
             StyledTextFormField(
-              labelText: this.passwordLabelText,
+              labelText: MyLocalizations.of(context).translate("password"),
               maxLines: 1,
               textInputType: TextInputType.visiblePassword,
               obscureText: true,
@@ -117,14 +150,15 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
                 padding: EdgeInsets.symmetric(vertical: 20.0),
                 child: StyledRaisedButton(
-                    title: this.enterLabelText, callback: _navigateToHome)),
+                    title: MyLocalizations.of(context).translate("enter"),
+                    callback: _navigateToHome)),
             StyledFlatButton(
-              title: this.forgotPasswordLabelText,
+              title: MyLocalizations.of(context).translate("forgotPassword"),
               callback: _navigateToForgotPassword,
               fontSize: 12,
             ),
             StyledFlatButton(
-              title: this.registerLabelText,
+              title: MyLocalizations.of(context).translate("registerButton"),
               callback: _navigateToRegister,
               fontSize: 16,
             )

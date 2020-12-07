@@ -4,6 +4,7 @@ import 'package:t1_inf1300/StyledListTile.dart';
 import 'package:t1_inf1300/StyledRaisedButtonLong.dart';
 import 'controller/controller.dart';
 import 'package:provider/provider.dart';
+import 'package:t1_inf1300/localizations.dart';
 
 class Cart extends StatefulWidget {
   Cart();
@@ -24,35 +25,21 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     controller = Provider.of<Controller>(context);
-    locale = controller.locale;
-
-    this.totalLabelText = "Total: ";
 
     getProducts();
 
-    if (locale == "pt") {
-      this.cartLabelText = "Carrinho";
-      this.checkoutLabelText = " - Finalizar compra";
-    } else if (locale == "es") {
-      this.cartLabelText = "Carro";
-      this.checkoutLabelText = " - Revisa";
-    } else {
-      this.cartLabelText = "Cart";
-      this.checkoutLabelText = " - Checkout";
-    }
-
     return Scaffold(
         appBar: AppBar(
-          title: Text(this.cartLabelText),
+          title: Text(MyLocalizations.of(context).translate("cart")),
         ),
         body: ListView.builder(
             itemCount: this._products.length,
             itemBuilder: (context, index) => this._buildRow(index)),
         persistentFooterButtons: <Widget>[
           StyledRaisedButtonLong(
-              title: this.totalLabelText +
+              title: MyLocalizations.of(context).translate("total") +
                   _getTotalPrice() +
-                  this.checkoutLabelText,
+                  MyLocalizations.of(context).translate("checkout"),
               callback: _finishBuy)
         ]);
   }

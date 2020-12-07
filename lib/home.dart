@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:t1_inf1300/localizations.dart';
 import 'package:t1_inf1300/newrequestfragment.dart';
 import 'package:t1_inf1300/MyOrders.dart';
 import 'package:t1_inf1300/main.dart';
-import 'dart:io';
 
 class HomePage extends StatefulWidget {
   HomePage();
@@ -13,60 +13,38 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String title = "Novo Pedido";
-  String menuLabelText = "";
-  String newOrderLabelText = "";
-  String myOrdersLabelText = "";
-  String exitLabelText = "";
-  String locale = "";
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    locale = Platform.localeName.substring(0, 2);
-
-    if (locale == "pt") {
-      this.title = "Novo Pedido";
-      this.menuLabelText = "Menu";
-      this.newOrderLabelText = "Novo Pedido";
-      this.myOrdersLabelText = "Meus Pedidos";
-      this.exitLabelText = "Sair";
-    } else if (locale == "es") {
-      this.title = "Nuevo Pedido";
-      this.menuLabelText = "Menú";
-      this.newOrderLabelText = "Nuevo Pedido";
-      this.myOrdersLabelText = "Mis Pedidos";
-      this.exitLabelText = "Sal";
-    } else {
-      this.title = "New Order";
-      this.menuLabelText = "Menu";
-      this.newOrderLabelText = "New Order";
-      this.myOrdersLabelText = "My Orders";
-      this.exitLabelText = "Exit";
-    }
+    this.title = MyLocalizations.of(context).translate("newOrder");
 
     return Scaffold(
-      appBar: AppBar(title: Text(this.title)),
+      appBar: AppBar(
+          title: Text(MyLocalizations.of(context).translate("newOrder"))),
       body: _getDrawerItem(_selectedIndex),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text(this.menuLabelText),
+              child: Text(MyLocalizations.of(context).translate("menu")),
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
             ),
             ListTile(
-              title: Text(this.newOrderLabelText),
+              title: Text(MyLocalizations.of(context).translate("newOrder")),
               onTap: () {
-                _onSelectItem(0, this.newOrderLabelText);
+                _onSelectItem(
+                    0, MyLocalizations.of(context).translate("newOrder"));
               },
             ),
             ListTile(
-              title: Text(this.myOrdersLabelText),
+              title: Text(MyLocalizations.of(context).translate("myOrders")),
               onTap: () {
-                _onSelectItem(1, this.myOrdersLabelText);
+                _onSelectItem(
+                    1, MyLocalizations.of(context).translate("myOrders"));
               },
             ),
             // ListTile(
@@ -76,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             //   },
             // ),
             ListTile(
-              title: Text(this.exitLabelText),
+              title: Text(MyLocalizations.of(context).translate("exit")),
               onTap: () {
                 _logout();
               },
@@ -107,8 +85,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   _logout() {
+    Map<String, Map<String, String>> localizedValues;
+
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (BuildContext context) => new MyApp()),
+        MaterialPageRoute(
+            builder: (BuildContext context) => new MyApp(localizedValues)),
         (Route<dynamic> route) => false);
   }
 }

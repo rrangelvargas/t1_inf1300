@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/StyledRaisedButton.dart';
 import 'package:t1_inf1300/StyledTextFormField.dart';
-import 'dart:io';
+import 'package:t1_inf1300/localizations.dart';
 
 class ForgotPassword extends StatefulWidget {
   ForgotPassword();
@@ -11,36 +11,12 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  String forgotPasswordLabelText = "";
-  String forgotPasswordHelpLabelText = "";
-  String recoverPasswordLabeltext = "";
-  String locale = "";
-
   @override
   Widget build(BuildContext context) {
-    locale = Platform.localeName.substring(0, 2);
-
-    if (locale == "pt") {
-      this.forgotPasswordLabelText = "Esqueci a senha";
-      this.forgotPasswordHelpLabelText =
-          "Para recuperar a senha, digite seu email abaixo que iremos enviar uma nova senha";
-      this.recoverPasswordLabeltext = "Recuperar senha";
-    } else if (locale == "es") {
-      this.forgotPasswordLabelText = "Olvidé la Contraseña";
-      this.forgotPasswordHelpLabelText =
-          "Para recuperar su contraseña, ingrese su correo electrónico a continuación y le enviaremos una nueva contraseña";
-      this.recoverPasswordLabeltext = "Recuperar contraseña";
-    } else {
-      this.forgotPasswordLabelText = "Forgot my password";
-      this.forgotPasswordHelpLabelText =
-          "To recover your password, enter your registered email below and we will be sent a new password";
-      this.recoverPasswordLabeltext = "Recover password";
-    }
-
     var width = MediaQuery.of(context).size.width * 0.8;
     return Scaffold(
       appBar: AppBar(
-        title: Text(this.forgotPasswordLabelText),
+        title: Text(MyLocalizations.of(context).translate("forgotPassword")),
       ),
       body: Center(
         child: Column(
@@ -50,7 +26,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               width: width,
               padding: EdgeInsets.symmetric(vertical: 20.0),
               child: Text(
-                this.forgotPasswordHelpLabelText,
+                MyLocalizations.of(context).translate("forgotPasswordHelp"),
                 style: TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
               ),
@@ -62,7 +38,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               obscureText: false,
             ),
             StyledRaisedButton(
-                title: this.recoverPasswordLabeltext,
+                title: MyLocalizations.of(context).translate("recoverPassword"),
                 callback: _forgotPassword),
           ],
         ),
