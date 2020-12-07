@@ -3,7 +3,7 @@ import 'package:t1_inf1300/utils/localizations.dart';
 import 'package:t1_inf1300/newrequestfragment.dart';
 import 'package:t1_inf1300/MyOrders.dart';
 import 'package:t1_inf1300/main.dart';
-import 'package:t1_inf1300/initialize_i18n.dart' show initializeI18n;
+import 'package:t1_inf1300/utils/initialize_i18n.dart' show initializeI18n;
 
 class HomePage extends StatefulWidget {
   HomePage();
