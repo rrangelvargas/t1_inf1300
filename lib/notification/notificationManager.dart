@@ -35,8 +35,9 @@ class NotificationManager {
         0, title, description, notificationDetails);
   }
 
-  Future<void> notificationAfterSec(String title, String description) async {
-    var timeDelayed = DateTime.now().add(Duration(seconds: 5));
+  Future<void> notificationAfterSec(
+      String title, String description, int duration) async {
+    var timeDelayed = DateTime.now().add(Duration(seconds: duration));
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
             'second channel ID', 'second Channel title', 'second channel body',

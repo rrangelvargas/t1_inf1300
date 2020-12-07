@@ -6,6 +6,9 @@ import 'package:t1_inf1300/style/StyledRaisedButtonLong.dart';
 import 'controller/controller.dart';
 import 'package:provider/provider.dart';
 import 'package:t1_inf1300/utils/localizations.dart';
+import 'package:t1_inf1300/notification/notificationManager.dart';
+
+NotificationManager n = new NotificationManager();
 
 class CartView extends StatefulWidget {
   CartView();
@@ -22,6 +25,12 @@ class _CartState extends State<CartView> {
   String checkoutLabelText = "";
   String locale = "";
   Controller controller;
+
+  @override
+  void initState() {
+    super.initState();
+    n.initializing();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +92,13 @@ class _CartState extends State<CartView> {
 
   void _finishBuy() {
     controller.addToOrder();
+    _notificate(MyLocalizations.of(context).translate("orderSuccessfully"),
+        MyLocalizations.of(context).translate("orderSuccessfullyDescription"));
     Navigator.of(context).push(
         MaterialPageRoute(builder: (BuildContext context) => new HomePage()));
+  }
+
+  void _notificate(String title, String description) async {
+    await n.notification(title, description);
   }
 }

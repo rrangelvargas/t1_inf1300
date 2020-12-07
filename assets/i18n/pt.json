@@ -29,5 +29,7 @@
     "total": "Total: ",
     "lowBattery": "Bateria fraca",
     "lowBatteryHelp": "Sua bateria está abaixo de 15%, carregue seu telefone",
-    "profile": "Minha conta"
+    "profile": "Minha conta",
+    "orderSuccessfully": "Pedido realizado com sucesso",
+    "orderSuccessfullyDescription": "Seu pedido foi realizado com sucesso. Você pode conferir na tela de meus pedidos."
 }

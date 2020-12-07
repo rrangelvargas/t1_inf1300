@@ -29,5 +29,7 @@
     "total": "Total: ",
     "lowBattery": "Low battery",
     "lowBatteryHelp": "Your battery is bellow 15%, please charge your phone",
-    "profile": "Profile"
+    "profile": "Profile",
+    "orderSuccessfully": "Order successfully placed",
+    "orderSuccessfullyDescription": "Your order has been successfully placed. You can check it on the screen of my orders."
 }
