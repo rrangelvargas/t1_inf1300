@@ -29,6 +29,7 @@ class _MyOrdersState extends State<MyOrders> {
   @override
   Widget build(BuildContext buildContext) {
     controller = Provider.of<Controller>(context);
+    getProducts();
 
     return Scaffold(
       body: Container(
