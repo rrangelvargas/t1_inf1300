@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:t1_inf1300/constant.dart' show languages;
+import 'package:t1_inf1300/utils/constant.dart' show languages;
 
 Future<String> loadJsonFromAsset(language) async {
   return await rootBundle.loadString('assets/i18n/' + language + '.json');

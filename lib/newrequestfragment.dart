@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:t1_inf1300/localizations.dart';
+import 'package:t1_inf1300/utils/localizations.dart';
 import 'package:t1_inf1300/model/Product.dart';
 import 'package:t1_inf1300/AddProduct.dart';
 import 'package:t1_inf1300/cartView.dart';
-import 'package:t1_inf1300/StyledRaisedButtonLong.dart';
+import 'package:t1_inf1300/style/StyledRaisedButtonLong.dart';
 import 'controller/controller.dart';
 import 'package:provider/provider.dart';
+import 'dart:math';
+import 'package:speech_to_text/speech_recognition_error.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 class NewRequest extends StatefulWidget {
   NewRequest();
@@ -19,10 +23,33 @@ class _NewRequestState extends State<NewRequest> {
   List<Product> _products = List<Product>();
   List<Product> _filteredList = List<Product>();
 
+  TextEditingController textController = new TextEditingController();
+  bool _hasSpeech = false;
+  double level = 0.0;
+  double minSoundLevel = 50000;
+  double maxSoundLevel = -50000;
+  String lastWords = "";
+  String lastError = "";
+  String lastStatus = "";
+  final SpeechToText speech = SpeechToText();
+
   @override
   void initState() {
     super.initState();
+    initSpeechState();
     getProducts();
+  }
+
+  Future<void> initSpeechState() async {
+    bool hasSpeech = await speech.initialize(
+        onError: errorListener, onStatus: statusListener);
+
+    print(hasSpeech);
+    setState(() {
+      _hasSpeech = hasSpeech;
+    });
+
+    if (!mounted) return;
   }
 
   @override
@@ -44,10 +71,16 @@ class _NewRequestState extends State<NewRequest> {
                   filterSearchResults(value);
                 });
               },
-              //controller: editingController,
+              controller: textController,
               decoration: InputDecoration(
                   hintText: MyLocalizations.of(context).translate("search"),
                   prefixIcon: Icon(Icons.search),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.mic),
+                    onPressed: !_hasSpeech || speech.isListening
+                        ? null
+                        : startListening,
+                  ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15.0)))),
             ),
@@ -157,5 +190,63 @@ class _NewRequestState extends State<NewRequest> {
     }
 
     setState(() {});
+  }
+
+  void startListening() {
+    lastWords = "";
+    lastError = "";
+    speech.listen(
+        onResult: resultListener,
+        listenFor: Duration(seconds: 10),
+        onSoundLevelChange: soundLevelListener,
+        cancelOnError: true,
+        localeId: "pt_BR",
+        listenMode: ListenMode.confirmation);
+    setState(() {});
+  }
+
+  void stopListening() {
+    speech.stop();
+    setState(() {
+      level = 0.0;
+    });
+  }
+
+  void cancelListening() {
+    speech.cancel();
+    setState(() {
+      level = 0.0;
+    });
+  }
+
+  void resultListener(SpeechRecognitionResult result) {
+    setState(() {
+      textController.text = "${result.recognizedWords}";
+      filterSearchResults("${result.recognizedWords}");
+    });
+  }
+
+  void errorListener(SpeechRecognitionError error) {
+    print("Received error status: $error, listening: ${speech.isListening}");
+    setState(() {
+      lastError = "${error.errorMsg} - ${error.permanent}";
+    });
+  }
+
+  void statusListener(String status) {
+    print(
+        "Received listener status: $status, listening: ${speech.isListening}");
+    setState(() {
+      lastStatus = "$status";
+    });
+  }
+
+  void soundLevelListener(double level) {
+    minSoundLevel = min(minSoundLevel, level);
+    maxSoundLevel = max(maxSoundLevel, level);
+    // print("sound level $level: $minSoundLevel - $maxSoundLevel ");
+    setState(() {
+      this.level = level;
+    });
   }
 }

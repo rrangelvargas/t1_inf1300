@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:t1_inf1300/localizations.dart';
+import 'package:t1_inf1300/utils/localizations.dart';
 import 'package:t1_inf1300/model/Product.dart';
 import 'controller/controller.dart';
 

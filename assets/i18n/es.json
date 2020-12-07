@@ -29,6 +29,7 @@
     "total": "Total: ",
     "lowBattery": "Batería baja",
     "lowBatteryHelp": "Su batería está por debajo del 15%, cargue su teléfono",
+    "profile": "Perfil",
     "orderSuccessfully": "Pedido realizado correctamente",
     "orderSuccessfullyDescription": "Su pedido se ha realizado correctamente. Puedes comprobarlo en la pantalla de mis pedidos."
 }

@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/home.dart';
 import 'package:t1_inf1300/model/Cart.dart';
-import 'package:t1_inf1300/StyledListTile.dart';
-import 'package:t1_inf1300/StyledRaisedButtonLong.dart';
+import 'package:t1_inf1300/style/StyledListTile.dart';
+import 'package:t1_inf1300/style/StyledRaisedButtonLong.dart';
 import 'controller/controller.dart';
 import 'package:provider/provider.dart';
-import 'package:t1_inf1300/localizations.dart';
+import 'package:t1_inf1300/utils/localizations.dart';
 import 'package:t1_inf1300/notification/notificationManager.dart';
-import 'package:android_alarm_manager/android_alarm_manager.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:t1_inf1300/initialize_i18n.dart' show initializeI18n;
-import 'package:t1_inf1300/constant.dart' show languages;
-import 'package:t1_inf1300/localizations.dart';
 
 NotificationManager n = new NotificationManager();
 

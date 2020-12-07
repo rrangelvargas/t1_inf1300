@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t1_inf1300/localizations.dart';
+import 'package:t1_inf1300/utils/localizations.dart';
 import 'package:t1_inf1300/newrequestfragment.dart';
 import 'package:t1_inf1300/MyOrders.dart';
 import 'package:t1_inf1300/main.dart';
@@ -49,9 +49,10 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             // ListTile(
-            //   title: Text('Perfil'),
+            //   title: Text(MyLocalizations.of(context).translate("profile")),
             //   onTap: () {
-            //     _onSelectItem(2);
+            //     _onSelectItem(
+            //         2, MyLocalizations.of(context).translate("profile"));
             //   },
             // ),
             ListTile(
