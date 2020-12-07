@@ -8,7 +8,6 @@ import android.os.BatteryManager
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 
-
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
