@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       batteryLevel = await platform.invokeMethod('getBatteryLevel');
     } on PlatformException {
-      batteryLevel = 40;
+      batteryLevel = 100;
     }
 
     setState(() {

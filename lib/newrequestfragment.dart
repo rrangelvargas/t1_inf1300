@@ -224,6 +224,7 @@ class _NewRequestState extends State<NewRequest> {
   void resultListener(SpeechRecognitionResult result) {
     setState(() {
       textController.text = "${result.recognizedWords}";
+      filterSearchResults("${result.recognizedWords}");
     });
   }
 
