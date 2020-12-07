@@ -21,12 +21,6 @@ class _MyOrdersState extends State<MyOrders> {
   Controller controller;
 
   @override
-  void initState() {
-    super.initState();
-    // getProducts();
-  }
-
-  @override
   Widget build(BuildContext buildContext) {
     controller = Provider.of<Controller>(context);
     getProducts();
@@ -60,21 +54,7 @@ class _MyOrdersState extends State<MyOrders> {
   }
 
   void getProducts() {
-    // _products.add(new Product(
-    //     10,
-    //     "Dorflex",
-    //     "20.0",
-    //     "Medicamento destinado a para dores",
-    //     "https://img.onofre.com.br/catalog/product/d/o/dorflex-com-10-comprimidos--7891058017392_hero1.jpg?width=265&height=265&quality=50&type=resize"));
-    // _products.add(new Product(
-    //     100,
-    //     "Dipirona",
-    //     "10.0",
-    //     "Medicamento destinado a para adultos",
-    //     "https://drogariasp.vteximg.com.br/arquivos/ids/168973-500-500/7896422507066.JPG.jpg?v=635651364067870000"));
-
     _orders.addAll(controller.orders);
-
     setState(() {});
   }
 
@@ -111,7 +91,7 @@ class _MyOrdersState extends State<MyOrders> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Text('RS ${_getTotalPrice(order)}'),
+                Text('${_getTotalPrice(order)}'),
                 Text(MyLocalizations.of(context).translate("waiting"))
               ],
             ),

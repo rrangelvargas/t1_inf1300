@@ -8,6 +8,10 @@ import 'package:provider/provider.dart';
 import 'package:t1_inf1300/localizations.dart';
 import 'package:t1_inf1300/notification/notificationManager.dart';
 import 'package:android_alarm_manager/android_alarm_manager.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:t1_inf1300/initialize_i18n.dart' show initializeI18n;
+import 'package:t1_inf1300/constant.dart' show languages;
+import 'package:t1_inf1300/localizations.dart';
 
 NotificationManager n = new NotificationManager();
 
@@ -93,12 +97,13 @@ class _CartState extends State<CartView> {
 
   void _finishBuy() {
     controller.addToOrder();
-    _notificate();
+    _notificate(MyLocalizations.of(context).translate("orderSuccessfully"),
+        MyLocalizations.of(context).translate("orderSuccessfullyDescription"));
     Navigator.of(context).push(
         MaterialPageRoute(builder: (BuildContext context) => new HomePage()));
   }
 
-  void _notificate() async {
-    await n.notification("", "");
+  void _notificate(String title, String description) async {
+    await n.notification(title, description);
   }
 }

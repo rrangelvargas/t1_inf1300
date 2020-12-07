@@ -28,5 +28,7 @@
     "confirmRegistration": "Finnish registration",
     "total": "Total: ",
     "lowBattery": "Low battery",
-    "lowBatteryHelp": "Your battery is bellow 15%, please charge your phone"
+    "lowBatteryHelp": "Your battery is bellow 15%, please charge your phone",
+    "orderSuccessfully": "Order successfully placed",
+    "orderSuccessfullyDescription": "Your order has been successfully placed. You can check it on the screen of my orders."
 }

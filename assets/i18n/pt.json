@@ -28,5 +28,7 @@
     "confirmRegistration": "Registrar",
     "total": "Total: ",
     "lowBattery": "Bateria fraca",
-    "lowBatteryHelp": "Sua bateria está abaixo de 15%, carregue seu telefone"
+    "lowBatteryHelp": "Sua bateria está abaixo de 15%, carregue seu telefone",
+    "orderSuccessfully": "Pedido realizado com sucesso",
+    "orderSuccessfullyDescription": "Seu pedido foi realizado com sucesso. Você pode conferir na tela de meus pedidos."
 }
