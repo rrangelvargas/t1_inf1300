@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:t1_inf1300/StyledRaisedButton.dart';
-import 'package:t1_inf1300/StyledTextFormField.dart';
-import 'package:t1_inf1300/localizations.dart';
+import 'package:t1_inf1300/style/StyledRaisedButton.dart';
+import 'package:t1_inf1300/style/StyledTextFormField.dart';
+import 'package:t1_inf1300/utils/localizations.dart';
 
 class ForgotPassword extends StatefulWidget {
   ForgotPassword();

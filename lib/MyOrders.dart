@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t1_inf1300/localizations.dart';
+import 'package:t1_inf1300/utils/localizations.dart';
 import 'package:t1_inf1300/model/Order.dart';
 import 'package:t1_inf1300/orderView.dart';
 import 'controller/controller.dart';

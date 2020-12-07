@@ -1,7 +1,7 @@
 import 'dart:async' show Future;
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 import 'package:flutter/material.dart';
-import 'package:t1_inf1300/constant.dart' show languages;
+import 'package:t1_inf1300/utils/constant.dart' show languages;
 
 class MyLocalizations {
   final Map<String, Map<String, String>> localizedValues;

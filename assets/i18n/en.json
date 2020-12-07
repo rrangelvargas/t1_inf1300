@@ -28,5 +28,6 @@
     "confirmRegistration": "Finnish registration",
     "total": "Total: ",
     "lowBattery": "Low battery",
-    "lowBatteryHelp": "Your battery is bellow 15%, please charge your phone"
+    "lowBatteryHelp": "Your battery is bellow 15%, please charge your phone",
+    "profile": "Profile"
 }

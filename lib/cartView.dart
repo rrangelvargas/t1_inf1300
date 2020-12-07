@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:t1_inf1300/home.dart';
 import 'package:t1_inf1300/model/Cart.dart';
-import 'package:t1_inf1300/StyledListTile.dart';
-import 'package:t1_inf1300/StyledRaisedButtonLong.dart';
+import 'package:t1_inf1300/style/StyledListTile.dart';
+import 'package:t1_inf1300/style/StyledRaisedButtonLong.dart';
 import 'controller/controller.dart';
 import 'package:provider/provider.dart';
-import 'package:t1_inf1300/localizations.dart';
+import 'package:t1_inf1300/utils/localizations.dart';
 
 class CartView extends StatefulWidget {
   CartView();

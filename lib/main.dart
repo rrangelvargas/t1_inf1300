@@ -7,17 +7,17 @@ import 'package:provider/provider.dart';
 import 'package:t1_inf1300/register.dart';
 import 'package:t1_inf1300/forgotpassword.dart';
 import 'package:t1_inf1300/home.dart';
-import 'package:t1_inf1300/StyledRaisedButton.dart';
-import 'package:t1_inf1300/StyledFlatButton.dart';
-import 'package:t1_inf1300/StyledTextFormField.dart';
+import 'package:t1_inf1300/style/StyledRaisedButton.dart';
+import 'package:t1_inf1300/style/StyledFlatButton.dart';
+import 'package:t1_inf1300/style/StyledTextFormField.dart';
 import 'package:t1_inf1300/controller/controller.dart';
 import 'package:t1_inf1300/notification/notificationManager.dart';
 import 'package:android_alarm_manager/android_alarm_manager.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:t1_inf1300/initialize_i18n.dart' show initializeI18n;
-import 'package:t1_inf1300/constant.dart' show languages;
-import 'package:t1_inf1300/localizations.dart'
+import 'package:t1_inf1300/utils/initialize_i18n.dart' show initializeI18n;
+import 'package:t1_inf1300/utils/constant.dart' show languages;
+import 'package:t1_inf1300/utils/localizations.dart'
     show MyLocalizations, MyLocalizationsDelegate;
 
 NotificationManager n = new NotificationManager();
@@ -92,15 +92,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const platform = const MethodChannel('samples.flutter.dev/battery');
 
-  int _batteryLevel = 0;
+  int _batteryLevel = 100;
   bool batteryNotification = false;
 
   Future<void> _getBatteryLevel() async {
     int batteryLevel;
     try {
       batteryLevel = await platform.invokeMethod('getBatteryLevel');
-    } on PlatformException catch (e) {
-      batteryLevel = 0;
+    } on PlatformException {
+      batteryLevel = 40;
     }
 
     setState(() {
@@ -111,13 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    // AndroidAlarmManager.oneShotAt(
-    //     DateTime.now().add(Duration(seconds: 5)), 0, notificate,
-    //     exact: true,
-    //     allowWhileIdle: true,
-    //     wakeup: true,
-    //     rescheduleOnReboot: true,
-    //     alarmClock: true);
     n.initializing();
   }
 
@@ -189,9 +182,5 @@ class _MyHomePageState extends State<MyHomePage> {
   void _navigateToForgotPassword() {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) => new ForgotPassword()));
-  }
-
-  void _notificate() async {
-    await n.notification("", "");
   }
 }

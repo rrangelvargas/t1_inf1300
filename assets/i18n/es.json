@@ -28,5 +28,6 @@
     "confirmRegistration": "Finalizar el registro",
     "total": "Total: ",
     "lowBattery": "Batería baja",
-    "lowBatteryHelp": "Su batería está por debajo del 15%, cargue su teléfono"
+    "lowBatteryHelp": "Su batería está por debajo del 15%, cargue su teléfono",
+    "profile": "Perfil"
 }
