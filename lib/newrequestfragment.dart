@@ -79,12 +79,10 @@ class _NewRequestState extends State<NewRequest> {
                 ),
           _filteredList.isEmpty & controller.cartIsEmpty
               ? Text("")
-              : Observer(
-                  builder: (_) => StyledRaisedButtonLong(
-                      title: MyLocalizations.of(context).translate("addToCart"),
-                      callback: _navigateToCart,
-                      isEnable: !controller.cartIsEmpty),
-                )
+              : StyledRaisedButtonLong(
+                  title: MyLocalizations.of(context).translate("addToCart"),
+                  callback: _navigateToCart,
+                  isEnable: !controller.cartIsEmpty)
         ],
       )),
     );

@@ -3,6 +3,7 @@ import 'package:t1_inf1300/localizations.dart';
 import 'package:t1_inf1300/newrequestfragment.dart';
 import 'package:t1_inf1300/MyOrders.dart';
 import 'package:t1_inf1300/main.dart';
+import 'package:t1_inf1300/initialize_i18n.dart' show initializeI18n;
 
 class HomePage extends StatefulWidget {
   HomePage();
@@ -84,8 +85,8 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).pop();
   }
 
-  _logout() {
-    Map<String, Map<String, String>> localizedValues;
+  _logout() async {
+    Map<String, Map<String, String>> localizedValues = await initializeI18n();
 
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
