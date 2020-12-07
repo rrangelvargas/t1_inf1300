@@ -26,5 +26,7 @@
     "name": "Name",
     "confirmPassword": "Confirm Password",
     "confirmRegistration": "Finnish registration",
-    "total": "Total: "
+    "total": "Total: ",
+    "lowBattery": "Low battery",
+    "lowBatteryHelp": "Your battery is bellow 15%, please charge your phone"
 }

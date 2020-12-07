@@ -26,5 +26,7 @@
     "name": "Nombre",
     "confirmPassword": "Confirmar Seña",
     "confirmRegistration": "Finalizar el registro",
-    "total": "Total: "
+    "total": "Total: ",
+    "lowBattery": "Batería baja",
+    "lowBatteryHelp": "Su batería está por debajo del 15%, cargue su teléfono"
 }

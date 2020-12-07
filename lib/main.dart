@@ -92,15 +92,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const platform = const MethodChannel('samples.flutter.dev/battery');
 
-  String _batteryLevel = 'Unknown battery level.';
+  int _batteryLevel = 0;
+  bool batteryNotification = false;
 
   Future<void> _getBatteryLevel() async {
-    String batteryLevel;
+    int batteryLevel;
     try {
-      final int result = await platform.invokeMethod('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
+      batteryLevel = await platform.invokeMethod('getBatteryLevel');
     } on PlatformException catch (e) {
-      batteryLevel = "Failed to get battery level: '${e.message}'.";
+      batteryLevel = 0;
     }
 
     setState(() {
@@ -124,7 +124,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     this._getBatteryLevel();
-    print(this._batteryLevel);
+
+    if (this._batteryLevel < 15 && !batteryNotification) {
+      n.notification(MyLocalizations.of(context).translate("lowBattery"),
+          MyLocalizations.of(context).translate("lowBatteryHelp"));
+      setState(() {
+        batteryNotification = true;
+      });
+    }
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
