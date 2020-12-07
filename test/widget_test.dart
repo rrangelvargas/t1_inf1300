@@ -12,8 +12,9 @@ import 'package:t1_inf1300/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    Map<String, Map<String, String>> localizedValues;
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(MyApp(localizedValues));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

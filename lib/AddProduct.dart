@@ -34,7 +34,7 @@ class _AddProductState extends State<AddProduct> {
       child: Text(MyLocalizations.of(context).translate("addItem")),
       onPressed: () {
         if (_quantity > 0) {
-          controller.addProduct(widget.product);
+          controller.addToCart(_quantity, widget.product);
           Navigator.pop(context);
         }
       },
