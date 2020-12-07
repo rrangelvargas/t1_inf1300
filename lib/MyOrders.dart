@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/tgome/Documents/BitBucket/Flutter/t1_inf1300/lib/model/Product.dart';
-import 'package:t1_inf1300/order.dart';
-import 'dart:io';
+import 'package:t1_inf1300/model/Order.dart';
+import 'package:t1_inf1300/orderView.dart';
+import 'controller/controller.dart';
+import 'package:provider/provider.dart';
 
 class MyOrders extends StatefulWidget {
   MyOrders();
@@ -11,21 +12,25 @@ class MyOrders extends StatefulWidget {
 }
 
 class _MyOrdersState extends State<MyOrders> {
-  List<Product> _products = List<Product>();
+  List<Order> _orders = List<Order>();
 
   String noOrdersLabelText = "";
   String waitingLabelText = "";
   String locale = "";
+  Controller controller;
 
   @override
   void initState() {
     super.initState();
-    getProducts();
+    // getProducts();
   }
 
   @override
   Widget build(BuildContext buildContext) {
-    locale = Platform.localeName.substring(0, 2);
+    controller = Provider.of<Controller>(context);
+    locale = controller.locale;
+
+    getProducts();
 
     if (locale == "pt") {
       this.noOrdersLabelText = "Você não fez nenhum pedido";
@@ -42,20 +47,22 @@ class _MyOrdersState extends State<MyOrders> {
       body: Container(
         child: Column(
           children: <Widget>[
-            _products.isEmpty
+            _orders.isEmpty
                 ? Text(this.noOrdersLabelText)
                 : Expanded(
                     child: ListView.builder(
-                        itemCount: _products.length,
+                        itemCount: _orders.length,
                         itemBuilder: (BuildContext context, int index) {
-                          Product product = _products[index];
+                          Order order = _orders[index];
                           return GestureDetector(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        new Order()));
+                                        new OrderView(
+                                          order: _orders[index],
+                                        )));
                               },
-                              child: _buildRow(product));
+                              child: _buildRow(order));
                         }),
                   )
           ],
@@ -64,24 +71,26 @@ class _MyOrdersState extends State<MyOrders> {
     );
   }
 
-  void getProducts() async {
-    _products.add(new Product(
-        10,
-        "Dorflex",
-        "20.0",
-        "Medicamento destinado a para dores",
-        "https://img.onofre.com.br/catalog/product/d/o/dorflex-com-10-comprimidos--7891058017392_hero1.jpg?width=265&height=265&quality=50&type=resize"));
-    _products.add(new Product(
-        100,
-        "Dipirona",
-        "10.0",
-        "Medicamento destinado a para adultos",
-        "https://drogariasp.vteximg.com.br/arquivos/ids/168973-500-500/7896422507066.JPG.jpg?v=635651364067870000"));
+  void getProducts() {
+    // _products.add(new Product(
+    //     10,
+    //     "Dorflex",
+    //     "20.0",
+    //     "Medicamento destinado a para dores",
+    //     "https://img.onofre.com.br/catalog/product/d/o/dorflex-com-10-comprimidos--7891058017392_hero1.jpg?width=265&height=265&quality=50&type=resize"));
+    // _products.add(new Product(
+    //     100,
+    //     "Dipirona",
+    //     "10.0",
+    //     "Medicamento destinado a para adultos",
+    //     "https://drogariasp.vteximg.com.br/arquivos/ids/168973-500-500/7896422507066.JPG.jpg?v=635651364067870000"));
+
+    _orders.addAll(controller.orders);
 
     setState(() {});
   }
 
-  _buildRow(Product product) {
+  _buildRow(Order order) {
     return Container(
       width: double.infinity,
       height: 100,
@@ -93,7 +102,7 @@ class _MyOrdersState extends State<MyOrders> {
           Expanded(
             flex: 2,
             child: Image(
-              image: NetworkImage(product.image),
+              image: NetworkImage(order.products[0].product.image),
               width: 50,
               height: 50,
             ),
@@ -104,8 +113,8 @@ class _MyOrdersState extends State<MyOrders> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Text(product.name),
-                  Text(product.description)
+                  Text(order.products[0].product.name),
+                  Text(order.products[0].product.description)
                 ]),
           ),
           Expanded(
@@ -114,7 +123,7 @@ class _MyOrdersState extends State<MyOrders> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Text('RS ${product.price}'),
+                Text('RS ${_getTotalPrice(order)}'),
                 Text(this.waitingLabelText)
               ],
             ),
@@ -122,5 +131,13 @@ class _MyOrdersState extends State<MyOrders> {
         ],
       )),
     );
+  }
+
+  String _getTotalPrice(Order order) {
+    var price = 0.0;
+    for (var item in order.products) {
+      price += double.parse(item.product.price) * item.quantity;
+    }
+    return "RS $price";
   }
 }

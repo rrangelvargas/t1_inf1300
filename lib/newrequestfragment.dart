@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:t1_inf1300/model/Product.dart';
 import 'package:t1_inf1300/AddProduct.dart';
-import 'package:t1_inf1300/cart.dart';
+import 'package:t1_inf1300/cartView.dart';
 import 'package:t1_inf1300/StyledRaisedButtonLong.dart';
 import 'controller/controller.dart';
 import 'package:provider/provider.dart';
@@ -96,13 +96,13 @@ class _NewRequestState extends State<NewRequest> {
                             child: _buildRow(product));
                       }),
                 ),
-          _filteredList.isEmpty & controller.productsIsEmpty
+          _filteredList.isEmpty & controller.cartIsEmpty
               ? Text("")
               : Observer(
                   builder: (_) => StyledRaisedButtonLong(
                       title: this.addToCartLabelText,
                       callback: _navigateToCart,
-                      isEnable: !controller.productsIsEmpty),
+                      isEnable: !controller.cartIsEmpty),
                 )
         ],
       )),
@@ -163,8 +163,8 @@ class _NewRequestState extends State<NewRequest> {
   }
 
   void _navigateToCart() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (BuildContext context) => new Cart()));
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (BuildContext context) => new CartView()));
   }
 
   void filterSearchResults(String query) {
