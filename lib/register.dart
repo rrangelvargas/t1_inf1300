@@ -16,7 +16,7 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
-        title: Text(MyLocalizations.of(context).translate("registerLabel")),
+        title: Text(MyLocalizations.of(context).translate("register")),
       ),
       body: Center(
         child: Column(
