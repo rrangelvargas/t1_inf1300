@@ -126,14 +126,26 @@ class _NewRequestState extends State<NewRequest> {
         10,
         "Dorflex",
         "20.0",
-        "Medicamento destinado a para dores",
+        "Medicamento destinado para dores",
         "https://img.onofre.com.br/catalog/product/d/o/dorflex-com-10-comprimidos--7891058017392_hero1.jpg?width=265&height=265&quality=50&type=resize"));
     _products.add(new Product(
         100,
         "Dipirona",
         "10.0",
-        "Medicamento destinado a para adultos",
+        "Medicamento destinado para adultos",
         "https://drogariasp.vteximg.com.br/arquivos/ids/168973-500-500/7896422507066.JPG.jpg?v=635651364067870000"));
+    _products.add(new Product(
+        1000,
+        "Tylenol",
+        "15.0",
+        "Medicamento destinado para dores e febre",
+        "https://www.remedsul.com.br/10781-thickbox_default/tylenol-750mg-c20-cp-rev.jpg"));
+    _products.add(new Product(
+        10000,
+        "Allegra",
+        "12.50",
+        "Medicamento destinado para alergia",
+        "https://www.drogariaminasbrasil.com.br/media/product/281/allegra-180mg-com-30-comprimidos-51c.jpg"));
 
     setState(() {});
   }
